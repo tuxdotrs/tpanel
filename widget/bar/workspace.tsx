@@ -48,9 +48,9 @@ export const WorkspaceButton = () => {
 
 export const FocusedClient = () => {
   const hyprland = AstalHyprland.get_default();
-  const title = bind(hyprland, "focusedClient")
-    .as((fcsClient) => fcsClient.title)
-    .toString();
+  const title = bind(hyprland, "focusedClient").as(
+    (fcsClient) => fcsClient.title,
+  );
 
-  return <label>{title}</label>;
+  return <label cssClasses={["focused-client"]}>{title}</label>;
 };
