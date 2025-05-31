@@ -5,8 +5,7 @@ export const Battery = () => {
   const battery = AstalBattery.get_default();
 
   return (
-    <box visible={bind(battery, "isPresent")}>
-      <image iconName={bind(battery, "batteryIconName")} />
+    <box cssClasses={["battery"]} visible={bind(battery, "isPresent")}>
       <label
         label={bind(battery, "percentage").as((p) => `${Math.floor(p * 100)}%`)}
       />
