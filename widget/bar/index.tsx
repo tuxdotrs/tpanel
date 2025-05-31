@@ -2,6 +2,7 @@ import { App, Astal, Gdk } from "astal/gtk4";
 import { FocusedClient, WorkspaceButton } from "./workspace";
 import { Battery } from "./battery";
 import { Launcher } from "./launcher";
+import { Tailscale } from "./tailscale";
 
 export const WINDOW_NAME = "bar";
 
@@ -41,5 +42,10 @@ const Center = () => {
 };
 
 const End = () => {
-  return <Battery />;
+  return (
+    <box spacing={15}>
+      <Tailscale />
+      <Battery />
+    </box>
+  );
 };
