@@ -5,18 +5,20 @@ $accent: #ebdbb2;
 $fg-color: #ebdbb2;
 $bg-color: #282828;
 $inactive-color: #807966;
+$rounded: 8px;
+$font-size: 1.3rem;
 
 window.Bar {
   background: $bg-color;
   color: $fg-color;
-  margin: 10px;
-  border-radius: 10px;
+  margin: 5px;
+  border-radius: $rounded;
   padding: 10px;
 
   .launcher {
     button {
       background-color: $inactive-color;
-      border-radius: 10px;
+      border-radius: $rounded;
       transition: all 0.15s ease-out;
       padding: 0px;
       margin: 0px;
@@ -30,15 +32,15 @@ window.Bar {
   .workspace-container {
     background-color: $bg-color;
     color: $fg-color;
-    border-radius: 10px;
+    border-radius: $rounded;
 
     .workspace-button {
       padding: 0px;
       border: 0px;
       margin: 2px;
       background-color: $inactive-color;
-      min-height: 1em;
-      min-width: 1rem;
+      min-height: 1.3rem;
+      min-width: 1.3rem;
       border-radius: calc(list.nth(8px, 1) * 1.5);
       transition: min-width 0.15s ease-out;
 
@@ -50,8 +52,8 @@ window.Bar {
       }
 
       &.active {
-        min-width: 2rem;
-        min-height: 1rem;
+        min-width: 3.5rem;
+        min-height: 1.3rem;
         background-color: $accent;
       }
 
@@ -63,11 +65,34 @@ window.Bar {
       }
     }
   }
+
+  .focused-client {
+    font-size: $font-size;
+    font-weight: 900;
+  }
+
+  .tailscale {
+    font-size: $font-size;
+    font-weight: 900;
+    color: $bg-color;
+    background-color: $inactive-color;
+    border-radius: $rounded;
+    padding: 10px;
+  }
+
+  .battery {
+    font-size: $font-size;
+    font-weight: 900;
+    color: $bg-color;
+    background-color: $inactive-color;
+    border-radius: $rounded;
+    padding: 10px;
+  }
 }
 
 window.app-launcher {
   background: $bg-color;
-  border-radius: 10px;
+  border-radius: $rounded;
   padding: 10px;
 
   .app-list {
@@ -75,7 +100,7 @@ window.app-launcher {
   }
 
   .app-button {
-    border-radius: 10px;
+    border-radius: $rounded;
   }
 
   .name {
