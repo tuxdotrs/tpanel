@@ -16,16 +16,14 @@ window.Bar {
   padding: 10px;
 
   .launcher {
-    button {
-      background-color: $inactive-color;
-      border-radius: $rounded;
-      transition: all 0.15s ease-out;
-      padding: 0px;
-      margin: 0px;
+    background-color: $inactive-color;
+    border-radius: $rounded;
+    transition: all 0.15s ease-out;
+    padding: 0px;
+    margin: 0px;
 
-      &:hover {
-        background-color: $bg-color;
-      }
+    &:hover {
+      background-color: $bg-color;
     }
   }
 
@@ -77,7 +75,16 @@ window.Bar {
     color: $bg-color;
     background-color: $inactive-color;
     border-radius: $rounded;
-    padding: 10px;
+    padding: 0px 10px;
+  }
+
+  .tray {
+    font-size: $font-size;
+    font-weight: 900;
+    color: #fff;
+    background-color: $inactive-color;
+    border-radius: $rounded;
+    padding: 0px 10px;
   }
 
   .battery {
@@ -86,7 +93,16 @@ window.Bar {
     color: $bg-color;
     background-color: $inactive-color;
     border-radius: $rounded;
-    padding: 10px;
+    padding: 0px 10px;
+  }
+
+  .time {
+    font-size: $font-size;
+    font-weight: 900;
+    color: $bg-color;
+    background-color: $inactive-color;
+    border-radius: $rounded;
+    padding: 0px 10px;
   }
 }
 
