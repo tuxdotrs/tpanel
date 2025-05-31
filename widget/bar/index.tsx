@@ -3,6 +3,8 @@ import { FocusedClient, WorkspaceButton } from "./workspace";
 import { Battery } from "./battery";
 import { Launcher } from "./launcher";
 import { Tailscale } from "./tailscale";
+import { Tray } from "./tray";
+import { Time } from "./time";
 
 export const WINDOW_NAME = "bar";
 
@@ -46,6 +48,8 @@ const End = () => {
     <box spacing={15}>
       <Tailscale />
       <Battery />
+      <Tray />
+      <Time />
     </box>
   );
 };

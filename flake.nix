@@ -33,6 +33,7 @@
           hyprland
           apps
           battery
+          tray
         ];
       };
 
@@ -51,6 +52,7 @@
               hyprland
               apps
               battery
+              tray
             ];
           })
         ];
