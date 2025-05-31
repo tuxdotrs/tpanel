@@ -1,0 +1,84 @@
+@use "sass:math";
+@use "sass:list";
+
+$accent: #ebdbb2;
+$fg-color: #ebdbb2;
+$bg-color: #282828;
+$inactive-color: #807966;
+
+window.Bar {
+  background: $bg-color;
+  color: $fg-color;
+  margin: 10px;
+  border-radius: 10px;
+  padding: 10px;
+
+  .launcher {
+    button {
+      background-color: $inactive-color;
+      border-radius: 10px;
+      transition: all 0.15s ease-out;
+      padding: 0px;
+      margin: 0px;
+
+      &:hover {
+        background-color: $bg-color;
+      }
+    }
+  }
+
+  .workspace-container {
+    background-color: $bg-color;
+    color: $fg-color;
+    border-radius: 10px;
+
+    .workspace-button {
+      padding: 0px;
+      border: 0px;
+      margin: 2px;
+      background-color: $inactive-color;
+      min-height: 1em;
+      min-width: 1rem;
+      border-radius: calc(list.nth(8px, 1) * 1.5);
+      transition: min-width 0.15s ease-out;
+
+      &:hover {
+        background-color: $fg-color;
+        &.occupied {
+          background-color: $fg-color;
+        }
+      }
+
+      &.active {
+        min-width: 2rem;
+        min-height: 1rem;
+        background-color: $accent;
+      }
+
+      &.occupied {
+        background-color: $accent;
+        &.active {
+          background-color: $accent;
+        }
+      }
+    }
+  }
+}
+
+window.app-launcher {
+  background: $bg-color;
+  border-radius: 10px;
+  padding: 10px;
+
+  .app-list {
+    background: $bg-color;
+  }
+
+  .app-button {
+    border-radius: 10px;
+  }
+
+  .name {
+    color: $fg-color;
+  }
+}
