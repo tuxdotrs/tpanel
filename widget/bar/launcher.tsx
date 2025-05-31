@@ -6,8 +6,8 @@ import { WINDOW_NAME } from "../app-launcher";
 export const Launcher = () => {
   return (
     <Gtk.ScrolledWindow
-      heightRequest={30}
-      widthRequest={30}
+      heightRequest={40}
+      widthRequest={40}
       cssClasses={["launcher"]}
     >
       <button onClicked={() => App.toggle_window(WINDOW_NAME)}>
