@@ -3,6 +3,7 @@ import { FocusedClient, WorkspaceButton } from "./workspace";
 import { Battery } from "./battery";
 import { Tailscale } from "./tailscale";
 import { Time } from "./time";
+import { Network } from "./network";
 
 export const WINDOW_NAME = "bar";
 
@@ -43,6 +44,7 @@ const Center = () => {
 const End = () => {
   return (
     <box spacing={10}>
+      <Network />
       <Tailscale />
       <Battery />
       <Time />

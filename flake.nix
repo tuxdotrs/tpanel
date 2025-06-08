@@ -34,6 +34,7 @@
           apps
           battery
           tray
+          network
         ];
       };
 
@@ -53,6 +54,7 @@
               apps
               battery
               tray
+              network
             ];
           })
         ];
