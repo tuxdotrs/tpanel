@@ -1,4 +1,4 @@
-import { Bar } from "./widget/bar";
-import { AppLauncher } from "./widget/app-launcher";
+import { Bar } from "./widgets/bar";
+import { AppLauncher } from "./widgets/app-launcher";
 
 export default [Bar, AppLauncher];

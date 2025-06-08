@@ -1,0 +1,17 @@
+window.app-launcher {
+  background: $bg-color;
+  border-radius: $rounded;
+  padding: 10px;
+
+  .app-list {
+    background: $bg-color;
+  }
+
+  .app-button {
+    border-radius: $rounded;
+  }
+
+  .name {
+    color: $fg-color;
+  }
+}

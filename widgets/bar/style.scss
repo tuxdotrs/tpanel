@@ -1,0 +1,100 @@
+@use "sass:math";
+@use "sass:list";
+
+window.Bar {
+  background: $bg-color;
+  color: $fg-color;
+  margin: 5px;
+  border-radius: $rounded;
+  padding: 10px;
+
+  .launcher {
+    background-color: $inactive-color;
+    border-radius: $rounded;
+    transition: all 0.15s ease-out;
+    padding: 0px;
+    margin: 0px;
+
+    &:hover {
+      background-color: $bg-color;
+    }
+  }
+
+  .workspace-container {
+    background-color: $bg-color;
+    color: $fg-color;
+    border-radius: $rounded;
+
+    .workspace-button {
+      padding: 0px;
+      border: 0px;
+      margin: 2px;
+      background-color: $inactive-color;
+      min-height: 1.3rem;
+      min-width: 1.3rem;
+      border-radius: calc(list.nth(8px, 1) * 1.5);
+      transition: min-width 0.15s ease-out;
+
+      &:hover {
+        background-color: $fg-color;
+        &.occupied {
+          background-color: $fg-color;
+        }
+      }
+
+      &.active {
+        min-width: 3.5rem;
+        min-height: 1.3rem;
+        background-color: $accent;
+      }
+
+      &.occupied {
+        background-color: $accent;
+        &.active {
+          background-color: $accent;
+        }
+      }
+    }
+  }
+
+  .focused-client {
+    font-size: $font-size;
+    font-weight: 900;
+  }
+
+  .tailscale {
+    font-size: $font-size;
+    font-weight: 900;
+    color: $bg-color;
+    background-color: $inactive-color;
+    border-radius: $rounded;
+    padding: 0px 10px;
+  }
+
+  .tray {
+    font-size: $font-size;
+    font-weight: 900;
+    color: #fff;
+    background-color: $inactive-color;
+    border-radius: $rounded;
+    padding: 0px 10px;
+  }
+
+  .battery {
+    font-size: $font-size;
+    font-weight: 900;
+    color: $bg-color;
+    background-color: $inactive-color;
+    border-radius: $rounded;
+    padding: 0px 10px;
+  }
+
+  .time {
+    font-size: $font-size;
+    font-weight: 900;
+    color: $bg-color;
+    background-color: $inactive-color;
+    border-radius: $rounded;
+    padding: 0px 10px;
+  }
+}
