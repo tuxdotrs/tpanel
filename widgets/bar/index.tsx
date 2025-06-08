@@ -1,15 +1,13 @@
 import { App, Astal, Gdk } from "astal/gtk4";
 import { FocusedClient, WorkspaceButton } from "./workspace";
 import { Battery } from "./battery";
-import { Launcher } from "./launcher";
 import { Tailscale } from "./tailscale";
-import { Tray } from "./tray";
 import { Time } from "./time";
 
 export const WINDOW_NAME = "bar";
 
 export const Bar = (gdkmonitor: Gdk.Monitor) => {
-  const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
+  const { TOP } = Astal.WindowAnchor;
 
   return (
     <window
@@ -18,7 +16,7 @@ export const Bar = (gdkmonitor: Gdk.Monitor) => {
       cssClasses={["Bar"]}
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      anchor={TOP | LEFT | RIGHT}
+      anchor={TOP}
       application={App}
     >
       <centerbox>
@@ -32,8 +30,7 @@ export const Bar = (gdkmonitor: Gdk.Monitor) => {
 
 const Start = () => {
   return (
-    <box spacing={15}>
-      <Launcher />
+    <box spacing={10}>
       <WorkspaceButton />
     </box>
   );
@@ -45,10 +42,9 @@ const Center = () => {
 
 const End = () => {
   return (
-    <box spacing={15}>
+    <box spacing={10}>
       <Tailscale />
       <Battery />
-      <Tray />
       <Time />
     </box>
   );

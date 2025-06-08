@@ -9,7 +9,7 @@ export const Tray = () => {
   }
 
   return (
-    <box cssClasses={["tray"]}>
+    <box cssClasses={["pill"]}>
       {bind(tray, "items").as((items) =>
         items.map((item) => <image gicon={bind(item, "gicon")} />),
       )}

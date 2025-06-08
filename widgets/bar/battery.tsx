@@ -5,9 +5,11 @@ export const Battery = () => {
   const battery = AstalBattery.get_default();
 
   return (
-    <box cssClasses={["battery"]} visible={bind(battery, "isPresent")}>
+    <box cssClasses={["pill"]} visible={bind(battery, "isPresent")}>
       <label
-        label={bind(battery, "percentage").as((p) => `${Math.floor(p * 100)}%`)}
+        label={bind(battery, "percentage").as(
+          (p) => `Bat: ${Math.floor(p * 100)}%`,
+        )}
       />
     </box>
   );
