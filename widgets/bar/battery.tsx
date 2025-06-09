@@ -8,7 +8,7 @@ export const Battery = () => {
     <box cssClasses={["pill"]} visible={bind(battery, "isPresent")}>
       <label
         label={bind(battery, "percentage").as(
-          (p) => `Bat: ${Math.floor(p * 100)}%`,
+          (p) => `B: ${Math.floor(p * 100)}%`,
         )}
       />
     </box>

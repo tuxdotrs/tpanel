@@ -12,7 +12,7 @@ export const Tailscale = () => {
       <label
         label={bind(tailscale).as((val) => {
           const data = val.split(" ");
-          return "Home: " + data[data.length - 1];
+          return "H: " + data[data.length - 1];
         })}
       />
     </box>
