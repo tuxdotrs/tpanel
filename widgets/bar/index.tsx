@@ -8,7 +8,7 @@ import { Network } from "./network";
 export const WINDOW_NAME = "bar";
 
 export const Bar = (gdkmonitor: Gdk.Monitor) => {
-  const { TOP } = Astal.WindowAnchor;
+  const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
 
   return (
     <window
@@ -17,7 +17,7 @@ export const Bar = (gdkmonitor: Gdk.Monitor) => {
       cssClasses={["Bar"]}
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      anchor={TOP}
+      anchor={TOP | LEFT | RIGHT}
       application={App}
     >
       <centerbox>
