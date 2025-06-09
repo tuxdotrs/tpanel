@@ -41,6 +41,11 @@
       astal = astal.packages.${system};
     };
 
+    apps.default = {
+      type = "app";
+      program = "${self.packages.${system}.default}/bin/tpanel";
+    };
+
     devShells.${system} = {
       default = pkgs.mkShell {
         nativeBuildInputs = [
