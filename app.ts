@@ -3,7 +3,7 @@ import style from "./style.scss";
 import windows from "./windows";
 import GLib from "gi://GLib?version=2.0";
 
-const icons = `${GLib.get_current_dir()}/assets/icons`;
+const icons = `${GLib.get_user_config_dir()}/tpanel/assets/icons`;
 
 App.start({
   css: style,
