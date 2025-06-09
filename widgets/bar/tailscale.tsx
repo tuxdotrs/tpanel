@@ -8,11 +8,12 @@ export const Tailscale = () => {
   ]);
 
   return (
-    <box cssClasses={["pill"]}>
+    <box cssClasses={["pill"]} spacing={5}>
+      <image iconName="fa-home-symbolic" />
       <label
         label={bind(tailscale).as((val) => {
           const data = val.split(" ");
-          return "H: " + data[data.length - 1];
+          return data[data.length - 1];
         })}
       />
     </box>

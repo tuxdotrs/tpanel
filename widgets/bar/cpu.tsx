@@ -8,8 +8,9 @@ export const CPU = () => {
   ]);
 
   return (
-    <box cssClasses={["pill"]}>
-      <label label={bind(cpu).as((val) => `CPU: ${parseInt(val) / 1000} °C`)} />
+    <box cssClasses={["pill"]} spacing={5}>
+      <image iconName="fa-cpu-symbolic" />
+      <label label={bind(cpu).as((val) => `${parseInt(val) / 1000} °C`)} />
     </box>
   );
 };

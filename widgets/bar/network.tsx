@@ -10,8 +10,8 @@ export const Network = () => {
       {wifi.as(
         (wifi) =>
           wifi && (
-            <box spacing={10}>
-              <image iconName={bind(wifi, "iconName")} />
+            <box spacing={5}>
+              <image iconName="fa-wifi-symbolic" />
               <label label={bind(wifi, "ssid")} />
             </box>
           ),

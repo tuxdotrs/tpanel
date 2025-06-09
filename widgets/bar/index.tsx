@@ -7,6 +7,7 @@ import { Network } from "./network";
 import { Profile } from "./profile";
 import { GPU } from "./gpu";
 import { CPU } from "./cpu";
+import { Launcher } from "./launcher";
 
 export const WINDOW_NAME = "bar";
 
@@ -35,6 +36,7 @@ export const Bar = (gdkmonitor: Gdk.Monitor) => {
 const Start = () => {
   return (
     <box spacing={10}>
+      <Launcher />
       <WorkspaceButton />
     </box>
   );

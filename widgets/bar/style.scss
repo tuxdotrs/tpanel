@@ -7,12 +7,6 @@ window.Bar {
   padding: 10px;
 
   .launcher {
-    background-color: $inactive-color;
-    border-radius: $rounded;
-    transition: all 0.15s ease-out;
-    padding: 0px;
-    margin: 0px;
-
     &:hover {
       background-color: $bg-color;
     }
@@ -65,6 +59,10 @@ window.Bar {
     color: $fg-color;
     background-color: $inactive-color;
     border-radius: calc($rounded / 1.5);
-    padding: 5px 10px;
+    padding: 8px;
+
+    image {
+      -gtk-icon-size: 1.5rem;
+    }
   }
 }

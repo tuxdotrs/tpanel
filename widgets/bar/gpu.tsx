@@ -4,8 +4,9 @@ export const GPU = () => {
   const gpu = Variable("").poll(5000, ["bash", "-c", "supergfxctl -g"]);
 
   return (
-    <box cssClasses={["pill"]}>
-      <label label={bind(gpu).as((val) => `GPU: ${val}`)} />
+    <box cssClasses={["pill"]} spacing={5}>
+      <image iconName="fa-video-card-symbolic" />
+      <label label={bind(gpu).as((val) => val)} />
     </box>
   );
 };
