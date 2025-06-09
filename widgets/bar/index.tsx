@@ -6,6 +6,7 @@ import { Time } from "./time";
 import { Network } from "./network";
 import { Profile } from "./profile";
 import { GPU } from "./gpu";
+import { CPU } from "./cpu";
 
 export const WINDOW_NAME = "bar";
 
@@ -47,6 +48,7 @@ const End = () => {
   return (
     <box spacing={10}>
       <Network />
+      <CPU />
       <GPU />
       <Profile />
       <Tailscale />
