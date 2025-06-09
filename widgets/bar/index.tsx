@@ -4,6 +4,8 @@ import { Battery } from "./battery";
 import { Tailscale } from "./tailscale";
 import { Time } from "./time";
 import { Network } from "./network";
+import { Profile } from "./profile";
+import { GPU } from "./gpu";
 
 export const WINDOW_NAME = "bar";
 
@@ -45,6 +47,8 @@ const End = () => {
   return (
     <box spacing={10}>
       <Network />
+      <GPU />
+      <Profile />
       <Tailscale />
       <Battery />
       <Time />
