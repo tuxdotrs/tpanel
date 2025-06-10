@@ -5,6 +5,8 @@ window.Bar {
   background: $bg-color;
   color: $fg-color;
   padding: 10px;
+  margin: 10px 10px 0px 10px;
+  border-radius: $rounded;
 
   .launcher {
     &:hover {
