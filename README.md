@@ -1,5 +1,5 @@
 <h3 align="center">
-  tux's Panel
+  tux's panel
 </h3>
 <p align="center">
   <a href="https://wakatime.com/badge/user/012e8da9-99fe-4600-891b-bd9d8dce73d9/project/78c29f20-90c3-4f22-a3b6-a83724f8e97e"><img src="https://wakatime.com/badge/user/012e8da9-99fe-4600-891b-bd9d8dce73d9/project/78c29f20-90c3-4f22-a3b6-a83724f8e97e.svg" alt="wakatime"></a>
