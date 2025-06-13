@@ -36,6 +36,7 @@
             battery
             tray
             network
+            notifd
           ];
         };
       in
@@ -88,6 +89,7 @@
               battery
               tray
               network
+              notifd
             ];
           })
         ];

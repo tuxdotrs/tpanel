@@ -1,0 +1,30 @@
+@use "sass:math";
+@use "sass:list";
+
+window.notifications {
+  margin: 10px;
+
+  .notification {
+    background: $bg-color;
+    padding: 20px;
+    border-radius: $rounded;
+    min-width: 20rem;
+    border: 1px solid transparent;
+
+    &.critical {
+      border: 1px solid rgba(red, 0.5);
+    }
+
+    &.low {
+      border: 1px solid rgba(yellow, 0.5);
+    }
+
+    .text {
+      color: rgba($fg-color, 0.8);
+
+      .title {
+        font-weight: 600;
+      }
+    }
+  }
+}
