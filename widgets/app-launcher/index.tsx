@@ -14,7 +14,7 @@ const hide = () => {
 const AppButton = ({ app }: { app: AstalApps.Application }) => {
   return (
     <button
-      cssClasses={["app-button"]}
+      cssClasses={["button"]}
       onClicked={() => {
         hide();
         app.launch();
@@ -33,7 +33,7 @@ const AppList = () => {
 
   return (
     <Gtk.ScrolledWindow vexpand heightRequest={500} widthRequest={300}>
-      <box vertical spacing={6} cssClasses={["app-list"]}>
+      <box vertical spacing={6} cssClasses={["list"]}>
         {appList.as((list) => list.map((app) => <AppButton app={app} />))}
       </box>
     </Gtk.ScrolledWindow>
@@ -46,36 +46,26 @@ const AppSearch = () => {
     hide();
   };
   return (
-    <overlay cssClasses={["entry-overlay"]} heightRequest={100}>
-      <Gtk.ScrolledWindow heightRequest={100}>
-        <Picture
-          file={Gio.file_new_for_path("/home/tux/Wallpapers/5m5kLI9.png")}
-          contentFit={Gtk.ContentFit.COVER}
-          overflow={Gtk.Overflow.HIDDEN}
-        />
-      </Gtk.ScrolledWindow>
-      <entry
-        type="overlay"
-        vexpand
-        text={text.get()}
-        primaryIconName={"system-search-symbolic"}
-        placeholderText="Search..."
-        onChanged={(self) => text.set(self.text)}
-        onActivate={onEnter}
-        setup={(self) => {
-          hook(self, App, "window-toggled", (_, win) => {
-            const winName = win.name;
-            const visible = win.visible;
+    <entry
+      cssClasses={["search"]}
+      vexpand
+      text={text.get()}
+      placeholderText="Search..."
+      onChanged={(self) => text.set(self.text)}
+      onActivate={onEnter}
+      setup={(self) => {
+        hook(self, App, "window-toggled", (_, win) => {
+          const winName = win.name;
+          const visible = win.visible;
 
-            if (winName == WINDOW_NAME && visible) {
-              text.set("");
-              self.set_text("");
-              self.grab_focus();
-            }
-          });
-        }}
-      />
-    </overlay>
+          if (winName == WINDOW_NAME && visible) {
+            text.set("");
+            self.set_text("");
+            self.grab_focus();
+          }
+        });
+      }}
+    />
   );
 };
 
@@ -96,6 +86,7 @@ export const AppLauncher = (gdkmonitor: Gdk.Monitor) => {
     >
       <box vertical spacing={6}>
         <AppSearch />
+        <Gtk.Separator orientation={Gtk.Orientation.HORIZONTAL} />
         <AppList />
       </box>
     </window>

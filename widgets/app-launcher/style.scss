@@ -3,12 +3,28 @@ window.app-launcher {
   border-radius: $rounded;
   padding: 10px;
 
-  .app-list {
+  .search {
+    min-width: 300px;
+    padding: 10px;
+    color: rgba($fg-color, 0.5);
+  }
+
+  separator {
+    border: 1px solid rgba($inactive-color, 0.5);
+  }
+
+  .list {
     background: $bg-color;
   }
 
-  .app-button {
+  .button {
     border-radius: $rounded;
+    padding: 10px;
+
+    &:hover,
+    &:focus {
+      background: $inactive-color;
+    }
   }
 
   .name {
