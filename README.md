@@ -8,7 +8,7 @@
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/tuxdotrs/tpanel">
 </p>
 
-![image](https://github.com/user-attachments/assets/a381b06c-618a-4a9e-b2ac-d6effa4f9069)
+![full](https://raw.githubusercontent.com/tuxdotrs/tpanel/refs/heads/main/assets/gallery/full.png)
 
 ## Installation
 
