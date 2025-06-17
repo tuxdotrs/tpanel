@@ -27,12 +27,12 @@ window.Bar {
       min-height: 1rem;
       min-width: 1rem;
       border-radius: calc(list.nth(8px, 1) * 1.5);
-      transition: min-width 0.15s ease-out;
+      transition: all 0.15s ease-out;
 
       &:hover {
-        background-color: $fg-color;
+        background: rgba($accent, 0.5);
         &.occupied {
-          background-color: $fg-color;
+          background: rgba($accent, 0.5);
         }
       }
 

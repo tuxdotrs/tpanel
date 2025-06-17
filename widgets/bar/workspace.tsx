@@ -1,5 +1,5 @@
 import { Variable, bind } from "astal";
-import { Gtk } from "astal/gtk4";
+import { Gdk, Gtk } from "astal/gtk4";
 import { ButtonProps } from "astal/gtk4/widget";
 import AstalHyprland from "gi://AstalHyprland";
 
@@ -30,6 +30,7 @@ const Workspace = ({ ws, ...props }: WsButtonProps) => {
       valign={Gtk.Align.CENTER}
       halign={Gtk.Align.CENTER}
       onClicked={() => ws.focus()}
+      cursor={Gdk.Cursor.new_from_name("pointer", null)}
       {...props}
     />
   );

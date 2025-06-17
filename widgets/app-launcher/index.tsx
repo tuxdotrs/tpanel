@@ -18,6 +18,7 @@ const AppButton = ({ app }: { app: AstalApps.Application }) => {
         hide();
         app.launch();
       }}
+      cursor={Gdk.Cursor.new_from_name("pointer", null)}
     >
       <box spacing={6} halign={Gtk.Align.START} valign={Gtk.Align.CENTER}>
         <image iconName={app.iconName} iconSize={Gtk.IconSize.LARGE} />
