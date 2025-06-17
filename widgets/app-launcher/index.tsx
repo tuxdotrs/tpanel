@@ -1,7 +1,6 @@
-import { Variable, Gio } from "astal";
+import { Variable } from "astal";
 import { App, Astal, Gdk, Gtk, hook } from "astal/gtk4";
 import AstalApps from "gi://AstalApps";
-import { Picture } from "../common";
 
 export const WINDOW_NAME = "app-launcher";
 const apps = new AstalApps.Apps();

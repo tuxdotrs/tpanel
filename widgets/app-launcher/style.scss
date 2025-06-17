@@ -2,6 +2,7 @@ window.app-launcher {
   background: $bg-color;
   border-radius: $rounded;
   padding: 10px;
+  font-size: 1.2rem;
 
   .search {
     min-width: 300px;
@@ -24,6 +25,10 @@ window.app-launcher {
     &:hover,
     &:focus {
       background: $inactive-color;
+    }
+
+    image {
+      -gtk-icon-size: 2rem;
     }
   }
 
