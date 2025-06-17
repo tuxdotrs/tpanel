@@ -1,18 +1,22 @@
 import { bind } from "astal";
 import AstalTray from "gi://AstalTray";
 
+const tray = AstalTray.get_default();
+
 export const Tray = () => {
-  const tray = AstalTray.get_default();
-
-  for (const item of tray.get_items()) {
-    print(item.title);
-  }
-
   return (
-    <box cssClasses={["pill"]}>
+    <box cssClasses={["pill", "tray"]}>
       {bind(tray, "items").as((items) =>
-        items.map((item) => <image gicon={bind(item, "gicon")} />),
+        items.map((item) => <Item item={item} />),
       )}
     </box>
+  );
+};
+
+const Item = ({ item }: { item: AstalTray.TrayItem }) => {
+  return (
+    <menubutton>
+      <image gicon={bind(item, "gicon")} />
+    </menubutton>
   );
 };

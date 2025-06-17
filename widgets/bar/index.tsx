@@ -8,6 +8,7 @@ import { Profile } from "./profile";
 import { GPU } from "./gpu";
 import { CPU } from "./cpu";
 import { Launcher } from "./launcher";
+import { Tray } from "./tray";
 
 export const WINDOW_NAME = "bar";
 
@@ -55,6 +56,7 @@ const End = () => {
       <Profile />
       <Tailscale />
       <Battery />
+      <Tray />
       <Time />
     </box>
   );
