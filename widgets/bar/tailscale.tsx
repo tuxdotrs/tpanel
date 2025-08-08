@@ -4,7 +4,7 @@ export const Tailscale = () => {
   const tailscale = Variable("").poll(5000, [
     "bash",
     "-c",
-    "tailscale ping vega",
+    "tailscale ping homelab",
   ]);
 
   return (
