@@ -7,6 +7,7 @@ export const Battery = () => {
   const percentage = createBinding(battery, "percentage");
   const charging = createBinding(battery, "charging");
   const state = createBinding(battery, "state");
+  const energyRate = createBinding(battery, "energyRate");
 
   const chargingIcon = createComputed(
     [percentage, charging, state],
@@ -29,6 +30,7 @@ export const Battery = () => {
     >
       <image iconName={chargingIcon} />
       <label label={percentage((p) => `${Math.floor(p * 100)}%`)} />
+      <label label={energyRate((v) => `${Math.floor(v * 10) / 10}W`)} />
     </box>
   );
 };
