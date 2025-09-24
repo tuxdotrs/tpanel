@@ -1,6 +1,6 @@
 import { Gdk } from "ags/gtk4";
 import app from "ags/gtk4/app";
-import { WINDOW_NAME } from "../app-launcher";
+import { WINDOW_NAME } from "../launcher";
 
 export const Launcher = () => {
   return (

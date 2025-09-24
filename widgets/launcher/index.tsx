@@ -3,7 +3,7 @@ import { Astal, Gdk, Gtk } from "ags/gtk4";
 import app from "ags/gtk4/app";
 import AstalApps from "gi://AstalApps";
 
-export const WINDOW_NAME = "app-launcher";
+export const WINDOW_NAME = "launcher";
 
 let searchEntry: Gtk.Entry;
 const apps = new AstalApps.Apps();
@@ -59,11 +59,11 @@ const AppSearch = () => {
   );
 };
 
-export const AppLauncher = (gdkmonitor: Gdk.Monitor) => {
+export const Launcher = (gdkmonitor: Gdk.Monitor) => {
   return (
     <window
       name={WINDOW_NAME}
-      cssClasses={["app-launcher"]}
+      cssClasses={["launcher"]}
       gdkmonitor={gdkmonitor}
       application={app}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
