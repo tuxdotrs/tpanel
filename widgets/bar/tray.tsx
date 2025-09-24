@@ -1,14 +1,13 @@
-import { bind } from "astal";
+import { createBinding, For } from "ags";
 import AstalTray from "gi://AstalTray";
 
-const tray = AstalTray.get_default();
-
 export const Tray = () => {
+  const tray = AstalTray.get_default();
+  const items = createBinding(tray, "items");
+
   return (
     <box cssClasses={["pill", "tray"]}>
-      {bind(tray, "items").as((items) =>
-        items.map((item) => <Item item={item} />),
-      )}
+      <For each={items}>{(item) => <Item item={item} />}</For>
     </box>
   );
 };
@@ -16,7 +15,7 @@ export const Tray = () => {
 const Item = ({ item }: { item: AstalTray.TrayItem }) => {
   return (
     <menubutton>
-      <image gicon={bind(item, "gicon")} />
+      <image gicon={createBinding(item, "gicon")} />
     </menubutton>
   );
 };

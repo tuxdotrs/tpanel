@@ -1,13 +1,16 @@
-import { Variable } from "astal";
-import { App, Astal, Gdk, Gtk, hook } from "astal/gtk4";
+import { createState, For } from "ags";
+import { Astal, Gdk, Gtk } from "ags/gtk4";
+import app from "ags/gtk4/app";
 import AstalApps from "gi://AstalApps";
 
 export const WINDOW_NAME = "app-launcher";
+
+let searchEntry: Gtk.Entry;
 const apps = new AstalApps.Apps();
-const text = Variable("");
+const [searchText, setSearchText] = createState("");
 
 const hide = () => {
-  App.get_window(WINDOW_NAME)?.set_visible(false);
+  app.get_window(WINDOW_NAME)?.set_visible(false);
 };
 
 const AppButton = ({ app }: { app: AstalApps.Application }) => {
@@ -29,42 +32,29 @@ const AppButton = ({ app }: { app: AstalApps.Application }) => {
 };
 
 const AppList = () => {
-  const appList = text((text) => apps.fuzzy_query(text));
+  const appList = searchText((text) => apps.fuzzy_query(text));
 
   return (
     <Gtk.ScrolledWindow vexpand heightRequest={500} widthRequest={300}>
-      <box vertical spacing={6} cssClasses={["list"]}>
-        {appList.as((list) => list.map((app) => <AppButton app={app} />))}
+      <box
+        spacing={6}
+        orientation={Gtk.Orientation.VERTICAL}
+        cssClasses={["list"]}
+      >
+        <For each={appList}>{(app) => <AppButton app={app} />}</For>
       </box>
     </Gtk.ScrolledWindow>
   );
 };
 
 const AppSearch = () => {
-  const onEnter = () => {
-    apps.fuzzy_query(text.get())?.[0].launch();
-    hide();
-  };
   return (
     <entry
+      $={(ref) => (searchEntry = ref)}
       cssClasses={["search"]}
-      vexpand
-      text={text.get()}
+      text={searchText}
       placeholderText="Search..."
-      onChanged={(self) => text.set(self.text)}
-      onActivate={onEnter}
-      setup={(self) => {
-        hook(self, App, "window-toggled", (_, win) => {
-          const winName = win.name;
-          const visible = win.visible;
-
-          if (winName == WINDOW_NAME && visible) {
-            text.set("");
-            self.set_text("");
-            self.grab_focus();
-          }
-        });
-      }}
+      onNotifyText={({ text }) => setSearchText(text)}
     />
   );
 };
@@ -75,20 +65,33 @@ export const AppLauncher = (gdkmonitor: Gdk.Monitor) => {
       name={WINDOW_NAME}
       cssClasses={["app-launcher"]}
       gdkmonitor={gdkmonitor}
+      application={app}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      application={App}
       keymode={Astal.Keymode.ON_DEMAND}
-      onKeyPressed={(_, keyval) => {
-        if (keyval === Gdk.KEY_Escape) {
-          App.toggle_window(WINDOW_NAME);
-        }
+      onNotifyVisible={({ visible }) => {
+        if (visible) searchEntry.grab_focus();
+        else searchEntry.set_text("");
       }}
     >
-      <box vertical spacing={6}>
+      <Gtk.EventControllerKey onKeyPressed={onKey} />
+
+      <box orientation={Gtk.Orientation.VERTICAL} spacing={6}>
         <AppSearch />
         <Gtk.Separator orientation={Gtk.Orientation.HORIZONTAL} />
         <AppList />
       </box>
     </window>
   );
+};
+
+const onKey = (
+  _e: Gtk.EventControllerKey,
+  keyval: number,
+  _: number,
+  mod: number,
+) => {
+  if (keyval === Gdk.KEY_Escape) {
+    app.toggle_window(WINDOW_NAME);
+    return;
+  }
 };

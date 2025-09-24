@@ -1,14 +1,15 @@
-import { bind, Variable } from "astal";
+import { createBinding, createComputed } from "ags";
 import AstalBattery from "gi://AstalBattery";
 
 export const Battery = () => {
   const battery = AstalBattery.get_default();
-  const chargingIcon = Variable.derive(
-    [
-      bind(battery, "percentage"),
-      bind(battery, "charging"),
-      bind(battery, "state"),
-    ],
+
+  const percentage = createBinding(battery, "percentage");
+  const charging = createBinding(battery, "charging");
+  const state = createBinding(battery, "state");
+
+  const chargingIcon = createComputed(
+    [percentage, charging, state],
     (percentage, charging, state) => {
       const batFull = state === AstalBattery.State.FULLY_CHARGED;
       const p = percentage * 100;
@@ -21,11 +22,13 @@ export const Battery = () => {
   );
 
   return (
-    <box cssClasses={["pill"]} visible={bind(battery, "isPresent")} spacing={5}>
-      <image iconName={chargingIcon()} onDestroy={() => chargingIcon.drop()} />
-      <label
-        label={bind(battery, "percentage").as((p) => `${Math.floor(p * 100)}%`)}
-      />
+    <box
+      cssClasses={["pill"]}
+      visible={createBinding(battery, "isPresent")}
+      spacing={5}
+    >
+      <image iconName={chargingIcon} />
+      <label label={percentage((p) => `${Math.floor(p * 100)}%`)} />
     </box>
   );
 };

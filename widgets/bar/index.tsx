@@ -1,14 +1,15 @@
-import { App, Astal, Gdk } from "astal/gtk4";
-import { FocusedClient, WorkspaceButton } from "./workspace";
+import { Astal, Gdk } from "ags/gtk4";
+import app from "ags/gtk4/app";
 import { Battery } from "./battery";
-import { Tailscale } from "./tailscale";
-import { Time } from "./time";
+import { CPU } from "./cpu";
+import { GPU } from "./gpu";
+import { Launcher } from "./launcher";
 import { Network } from "./network";
 import { Profile } from "./profile";
-import { GPU } from "./gpu";
-import { CPU } from "./cpu";
-import { Launcher } from "./launcher";
+import { Tailscale } from "./tailscale";
+import { Time } from "./time";
 import { Tray } from "./tray";
+import { FocusedClient, WorkspaceButton } from "./workspace";
 
 export const WINDOW_NAME = "bar";
 
@@ -23,41 +24,29 @@ export const Bar = (gdkmonitor: Gdk.Monitor) => {
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={TOP | LEFT | RIGHT}
-      application={App}
+      application={app}
     >
       <centerbox>
-        <Start />
-        <Center />
-        <End />
+        <box spacing={10} $type="start">
+          <Launcher />
+          <WorkspaceButton />
+        </box>
+
+        <box spacing={10} $type="center">
+          <FocusedClient />
+        </box>
+
+        <box spacing={10} $type="end">
+          <Network />
+          <CPU />
+          <GPU />
+          <Profile />
+          <Tailscale />
+          <Battery />
+          <Tray />
+          <Time />
+        </box>
       </centerbox>
     </window>
-  );
-};
-
-const Start = () => {
-  return (
-    <box spacing={10}>
-      <Launcher />
-      <WorkspaceButton />
-    </box>
-  );
-};
-
-const Center = () => {
-  return <FocusedClient />;
-};
-
-const End = () => {
-  return (
-    <box spacing={10}>
-      <Network />
-      <CPU />
-      <GPU />
-      <Profile />
-      <Tailscale />
-      <Battery />
-      <Tray />
-      <Time />
-    </box>
   );
 };
