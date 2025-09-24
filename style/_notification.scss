@@ -1,3 +1,4 @@
+@use "./_variable.scss" as *;
 @use "sass:math";
 @use "sass:list";
 
@@ -15,7 +16,7 @@ window.notifications {
       border: 1px solid rgba(red, 0.5);
     }
 
-    &.low {
+    &.normal {
       border: 1px solid rgba(yellow, 0.5);
     }
 

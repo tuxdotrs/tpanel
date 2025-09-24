@@ -1,3 +1,5 @@
+@use "./_variable.scss" as *;
+
 window.launcher {
   background: $bg-color;
   border-radius: $rounded;
