@@ -29,8 +29,8 @@ export const Header = () => {
       />
 
       <box valign={CENTER} orientation={VERTICAL} spacing={5}>
-        <label halign={START} label="tux" />
-        <label halign={START} label="@tuxdotrs" />
+        <label halign={START} label="tux" cssClasses={["name"]} />
+        <label halign={START} label="@tuxdotrs" cssClasses={["username"]} />
       </box>
 
       <box

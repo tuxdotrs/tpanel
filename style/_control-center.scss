@@ -30,6 +30,16 @@ window.control-center {
   }
 
   .header {
+    .name {
+      color: rgba($fg-color, 0.8);
+      font-size: 1.8rem;
+    }
+
+    .username {
+      color: rgba($fg-color, 0.5);
+      font-size: 1.2rem;
+    }
+
     .controls {
       button {
         background-color: $inactive-color;
