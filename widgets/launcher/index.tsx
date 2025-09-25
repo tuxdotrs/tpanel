@@ -35,9 +35,9 @@ const AppList = () => {
   const appList = searchText((text) => apps.fuzzy_query(text));
 
   return (
-    <Gtk.ScrolledWindow vexpand heightRequest={500} widthRequest={300}>
+    <Gtk.ScrolledWindow vexpand heightRequest={500} widthRequest={350}>
       <box
-        spacing={6}
+        spacing={5}
         orientation={Gtk.Orientation.VERTICAL}
         cssClasses={["list"]}
       >
@@ -75,7 +75,7 @@ export const Launcher = (gdkmonitor: Gdk.Monitor) => {
     >
       <Gtk.EventControllerKey onKeyPressed={onKey} />
 
-      <box orientation={Gtk.Orientation.VERTICAL} spacing={6}>
+      <box orientation={Gtk.Orientation.VERTICAL} spacing={5}>
         <AppSearch />
         <Gtk.Separator orientation={Gtk.Orientation.HORIZONTAL} />
         <AppList />
