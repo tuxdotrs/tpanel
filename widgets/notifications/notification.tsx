@@ -30,15 +30,19 @@ const urgency = (n: AstalNotifd.Notification) => {
   }
 };
 
+const { VERTICAL } = Gtk.Orientation;
+const { START, END, CENTER } = Gtk.Align;
+
 export const Notification = ({ n }: { n: AstalNotifd.Notification }) => {
   return (
     <Adw.Clamp maximumSize={400}>
       <box
         widthRequest={400}
         class={`notification ${urgency(n)}`}
-        orientation={Gtk.Orientation.VERTICAL}
+        orientation={VERTICAL}
+        spacing={20}
       >
-        <box class="header">
+        <box class="header" spacing={10}>
           {(n.appIcon || isIcon(n.desktopEntry)) && (
             <image
               class="app-icon"
@@ -48,38 +52,28 @@ export const Notification = ({ n }: { n: AstalNotifd.Notification }) => {
           )}
           <label
             class="app-name"
-            halign={Gtk.Align.START}
+            halign={START}
             ellipsize={Pango.EllipsizeMode.END}
             label={n.appName || "Unknown"}
           />
-          <label
-            class="time"
-            hexpand
-            halign={Gtk.Align.END}
-            label={time(n.time)}
-          />
+          <label class="time" hexpand halign={END} label={time(n.time)} />
           <button onClicked={() => n.dismiss()}>
             <image iconName="window-close-symbolic" />
           </button>
         </box>
-        <Gtk.Separator visible />
-        <box class="content">
+        <box class="content" spacing={10}>
           {n.image && fileExists(n.image) && (
-            <image valign={Gtk.Align.START} class="image" file={n.image} />
+            <image valign={START} class="image" file={n.image} />
           )}
           {n.image && isIcon(n.image) && (
-            <box valign={Gtk.Align.START} class="icon-image">
-              <image
-                iconName={n.image}
-                halign={Gtk.Align.CENTER}
-                valign={Gtk.Align.CENTER}
-              />
+            <box valign={START} class="icon-image">
+              <image iconName={n.image} halign={CENTER} valign={CENTER} />
             </box>
           )}
-          <box orientation={Gtk.Orientation.VERTICAL}>
+          <box orientation={VERTICAL} valign={CENTER}>
             <label
               class="summary"
-              halign={Gtk.Align.START}
+              halign={START}
               xalign={0}
               label={n.summary}
               ellipsize={Pango.EllipsizeMode.END}
@@ -89,7 +83,7 @@ export const Notification = ({ n }: { n: AstalNotifd.Notification }) => {
                 class="body"
                 wrap
                 useMarkup
-                halign={Gtk.Align.START}
+                halign={START}
                 xalign={0}
                 justify={Gtk.Justification.FILL}
                 label={n.body}
@@ -98,10 +92,14 @@ export const Notification = ({ n }: { n: AstalNotifd.Notification }) => {
           </box>
         </box>
         {n.actions.length > 0 && (
-          <box class="actions">
+          <box class="actions" spacing={5}>
             {n.actions.map(({ label, id }) => (
-              <button hexpand onClicked={() => n.invoke(id)}>
-                <label label={label} halign={Gtk.Align.CENTER} hexpand />
+              <button
+                hexpand
+                cursor={Gdk.Cursor.new_from_name("pointer", null)}
+                onClicked={() => n.invoke(id)}
+              >
+                <label label={label} halign={CENTER} hexpand />
               </button>
             ))}
           </box>

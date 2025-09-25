@@ -10,14 +10,33 @@ window.notifications {
     padding: 20px;
     border-radius: $rounded;
     min-width: 20rem;
-    border: 1px solid transparent;
+
+    .header {
+      .app-icon {
+        -gtk-icon-size: 2rem;
+      }
+    }
+
+    .content {
+      .image {
+        -gtk-icon-size: 4rem;
+      }
+    }
+
+    .actions {
+      button {
+        background: $inactive-color;
+        padding: 10px;
+        border-radius: $rounded;
+
+        &:hover {
+          background: $bg-color;
+        }
+      }
+    }
 
     &.critical {
       border: 1px solid rgba(red, 0.5);
-    }
-
-    &.normal {
-      border: 1px solid rgba(yellow, 0.5);
     }
 
     .text {
