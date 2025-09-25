@@ -10,6 +10,7 @@ import { Tailscale } from "./tailscale";
 import { Time } from "./time";
 import { Tray } from "./tray";
 import { FocusedClient, WorkspaceButton } from "./workspace";
+import { Volume } from "./volume";
 
 export const WINDOW_NAME = "bar";
 
@@ -42,6 +43,7 @@ export const Bar = (gdkmonitor: Gdk.Monitor) => {
           <GPU />
           <Profile />
           <Tailscale />
+          <Volume />
           <Battery />
           <Tray />
           <Time />

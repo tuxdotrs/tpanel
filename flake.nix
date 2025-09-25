@@ -29,6 +29,7 @@
       tray
       network
       notifd
+      wireplumber
     ];
 
     extraPackages =

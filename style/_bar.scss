@@ -78,4 +78,22 @@ window.Bar {
       padding: 0px 5px;
     }
   }
+
+  .volume {
+    image {
+      -gtk-icon-size: 1.5rem;
+    }
+
+    trough {
+      background-color: $bg-color;
+      min-height: 10px;
+      border-radius: 10px;
+    }
+
+    highlight {
+      background-color: $fg-color;
+      min-height: 10px;
+      border-radius: 10px;
+    }
+  }
 }
