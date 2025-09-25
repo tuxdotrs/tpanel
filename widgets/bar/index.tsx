@@ -29,7 +29,7 @@ export const Bar = (gdkmonitor: Gdk.Monitor) => {
     >
       <centerbox>
         <box spacing={10} $type="start">
-          <Launcher />
+          <Launcher windowName="launcher" icon="nix-symbolic" />
           <WorkspaceButton />
         </box>
 
@@ -47,6 +47,7 @@ export const Bar = (gdkmonitor: Gdk.Monitor) => {
           <Battery />
           <Tray />
           <Time />
+          <Launcher windowName="control-center" icon="fa-ghost-symbolic" />
         </box>
       </centerbox>
     </window>
