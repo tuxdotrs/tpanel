@@ -1,4 +1,4 @@
-import { createBinding, createComputed } from "ags";
+import { createBinding, createComputed, With } from "ags";
 import { Gdk, Gtk } from "ags/gtk4";
 import AstalHyprland from "gi://AstalHyprland";
 
@@ -48,8 +48,10 @@ export const FocusedClient = () => {
   const focused = createBinding(hyprland, "focusedClient");
 
   return (
-    <box cssClasses={["focused-client"]} visible={focused.as(Boolean)}>
-      <label label={focused((client) => client.title)} />
+    <box cssClasses={["focused-client"]}>
+      <With value={focused}>
+        {(client) => client && <label label={createBinding(client, "title")} />}
+      </With>
     </box>
   );
 };
