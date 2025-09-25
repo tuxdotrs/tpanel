@@ -1,5 +1,5 @@
 import { createBinding } from "ags";
-import { Gtk } from "ags/gtk4";
+import { Gdk, Gtk } from "ags/gtk4";
 import AstalWp from "gi://AstalWp";
 
 export const SlidingControls = () => {
@@ -23,6 +23,7 @@ export const SlidingControls = () => {
           hexpand
           onChangeValue={({ value }) => speaker.set_volume(value)}
           value={createBinding(speaker, "volume")}
+          cursor={Gdk.Cursor.new_from_name("pointer", null)}
         />
       </box>
 
@@ -32,6 +33,7 @@ export const SlidingControls = () => {
           hexpand
           onChangeValue={({ value }) => microphone.set_volume(value)}
           value={createBinding(microphone, "volume")}
+          cursor={Gdk.Cursor.new_from_name("pointer", null)}
         />
       </box>
     </box>
