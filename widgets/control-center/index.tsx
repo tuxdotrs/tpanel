@@ -15,7 +15,6 @@ export const ControlCenter = (gdkmonitor: Gdk.Monitor) => {
   return (
     <window
       name={WINDOW_NAME}
-      visible
       cssClasses={["control-center"]}
       gdkmonitor={gdkmonitor}
       application={app}

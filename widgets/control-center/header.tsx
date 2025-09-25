@@ -2,6 +2,8 @@ import { Gdk, Gtk } from "ags/gtk4";
 import { execAsync } from "ags/process";
 import { createPoll } from "ags/time";
 import GLib from "gi://GLib";
+import { WINDOW_NAME } from ".";
+import app from "ags/gtk4/app";
 
 export const Header = () => {
   const { VERTICAL } = Gtk.Orientation;
@@ -12,6 +14,11 @@ export const Header = () => {
     1000,
     () => GLib.DateTime.new_now_local().format("%a %b %d - %I:%M:%S %p")!,
   );
+
+  const handleExec = (cmd: string) => {
+    app.toggle_window(WINDOW_NAME);
+    execAsync(cmd);
+  };
 
   return (
     <box cssClasses={["header"]}>
@@ -37,21 +44,21 @@ export const Header = () => {
         <box spacing={10} homogeneous>
           <button
             cursor={Gdk.Cursor.new_from_name("pointer", null)}
-            onClicked={() => execAsync("flameshot launcher")}
+            onClicked={() => handleExec("flameshot launcher")}
           >
             <image iconName="fa-screenshot-symbolic" />
           </button>
 
           <button
             cursor={Gdk.Cursor.new_from_name("pointer", null)}
-            onClicked={() => execAsync("hyprlock")}
+            onClicked={() => handleExec("hyprlock")}
           >
             <image iconName="fa-lock-symbolic" />
           </button>
 
           <button
             cursor={Gdk.Cursor.new_from_name("pointer", null)}
-            onClicked={() => execAsync("poweroff")}
+            onClicked={() => handleExec("poweroff")}
           >
             <image iconName="fa-power-symbolic" />
           </button>
