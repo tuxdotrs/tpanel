@@ -4,6 +4,7 @@ import { Footer } from "./footer";
 import { Header } from "./header";
 import { NotificationList } from "./notification-list";
 import { SlidingControls } from "./sliding-controls";
+import { SystemInfo } from "./system-info";
 
 export const WINDOW_NAME = "control-center";
 
@@ -14,6 +15,7 @@ export const ControlCenter = (gdkmonitor: Gdk.Monitor) => {
   return (
     <window
       name={WINDOW_NAME}
+      visible
       cssClasses={["control-center"]}
       gdkmonitor={gdkmonitor}
       application={app}
@@ -24,6 +26,7 @@ export const ControlCenter = (gdkmonitor: Gdk.Monitor) => {
       <box vexpand orientation={VERTICAL} spacing={20}>
         <Header />
         <SlidingControls />
+        <SystemInfo />
         <NotificationList />
         <Footer />
       </box>
