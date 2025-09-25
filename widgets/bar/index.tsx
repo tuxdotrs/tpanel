@@ -9,7 +9,7 @@ import { Profile } from "./profile";
 import { Tailscale } from "./tailscale";
 import { Time } from "./time";
 import { Tray } from "./tray";
-import { FocusedClient, WorkspaceButton } from "./workspace";
+import { WorkspaceButton } from "./workspace";
 
 export const WINDOW_NAME = "bar";
 
@@ -29,19 +29,18 @@ export const Bar = (gdkmonitor: Gdk.Monitor) => {
       <centerbox>
         <box spacing={10} $type="start">
           <Launcher windowName="launcher" icon="nix-symbolic" />
-          <WorkspaceButton />
-        </box>
-
-        <box spacing={10} $type="center">
-          <FocusedClient />
-        </box>
-
-        <box spacing={10} $type="end">
-          <Network />
           <CPU />
           <GPU />
           <Profile />
           <Tailscale />
+        </box>
+
+        <box spacing={10} $type="center">
+          <WorkspaceButton />
+        </box>
+
+        <box spacing={10} $type="end">
+          <Network />
           <Battery />
           <Tray />
           <Time />
