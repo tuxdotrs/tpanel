@@ -10,7 +10,7 @@ export const Header = () => {
     <box cssClasses={["header"]}>
       <image
         css="margin-left: -15px;"
-        file={`${GLib.get_user_config_dir()}/tpanel/assets/avatar.png`}
+        file={`${GLib.get_user_config_dir()}/tpanel/assets/icons/avatar.png`}
         pixelSize={100}
       />
 
