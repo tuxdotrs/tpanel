@@ -1,0 +1,65 @@
+@use "./_variable.scss" as *;
+@use "sass:math";
+@use "sass:list";
+
+window.control-center {
+  background: $bg-color;
+  color: $fg-color;
+  min-width: 400px;
+  padding: 20px;
+  margin: 10px;
+  border-radius: $rounded;
+
+  .pill {
+    font-size: $font-size;
+    color: $fg-color;
+    background-color: $inactive-color;
+    border-radius: calc($rounded / 1.5);
+    padding: 20px;
+
+    image {
+      -gtk-icon-size: 2rem;
+    }
+  }
+
+  .header {
+    .controls {
+      button {
+        background-color: $inactive-color;
+        border-radius: calc($rounded / 1.5);
+        padding: 20px;
+
+        &:hover {
+          background-color: $bg-color;
+        }
+      }
+
+      image {
+        -gtk-icon-size: 2rem;
+      }
+    }
+  }
+
+  .footer {
+    label {
+      font-size: 18px;
+      font-family: BigBlueTermPlus Nerd Font;
+    }
+  }
+
+  .volume {
+    trough {
+      background-color: $bg-color;
+      min-height: 10px;
+      min-width: 10px;
+      border-radius: 10px;
+    }
+
+    highlight {
+      background-color: $fg-color;
+      min-height: 10px;
+      min-width: 10px;
+      border-radius: 10px;
+    }
+  }
+}
