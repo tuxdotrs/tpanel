@@ -24,6 +24,7 @@ window.control-center {
 
   .system-info {
     image {
+      color: rgba($accent, 0.8);
       -gtk-icon-size: 4rem;
     }
   }
@@ -40,7 +41,6 @@ window.control-center {
           background-color: rgba($accent, 1);
 
           image {
-            color: $bg-color;
           }
         }
       }
@@ -53,6 +53,7 @@ window.control-center {
 
   .footer {
     label {
+      color: $accent;
       font-size: 18px;
       font-family: BigBlueTermPlus Nerd Font;
     }
@@ -67,7 +68,7 @@ window.control-center {
     }
 
     highlight {
-      background-color: $accent;
+      background-color: rgba($accent, 0.8);
       min-height: 10px;
       min-width: 10px;
       border-radius: 10px;
