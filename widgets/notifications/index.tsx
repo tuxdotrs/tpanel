@@ -42,7 +42,7 @@ export const Notifications = (gdkmonitor: Gdk.Monitor) => {
       visible={notifications((ns) => ns.length > 0)}
       anchor={TOP | RIGHT}
     >
-      <box orientation={Gtk.Orientation.VERTICAL}>
+      <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
         <For each={notifications}>{(n) => <Notification n={n} />}</For>
       </box>
     </window>
