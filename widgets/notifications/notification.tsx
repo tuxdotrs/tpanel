@@ -57,7 +57,11 @@ export const Notification = ({ n }: { n: AstalNotifd.Notification }) => {
             label={n.appName || "Unknown"}
           />
           <label class="time" hexpand halign={END} label={time(n.time)} />
-          <button onClicked={() => n.dismiss()}>
+          <button
+            class="close"
+            onClicked={() => n.dismiss()}
+            cursor={Gdk.Cursor.new_from_name("pointer", null)}
+          >
             <image iconName="window-close-symbolic" />
           </button>
         </box>

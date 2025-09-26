@@ -12,6 +12,16 @@ window.notifications {
     min-width: 20rem;
 
     .header {
+      .close {
+        padding: 10px;
+        background: $inactive-color;
+        border-radius: $rounded;
+
+        &:hover {
+          background: $bg-color;
+        }
+      }
+
       .app-icon {
         -gtk-icon-size: 2rem;
       }
