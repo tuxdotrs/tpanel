@@ -30,6 +30,7 @@
       network
       notifd
       wireplumber
+      cava
     ];
 
     extraPackages =

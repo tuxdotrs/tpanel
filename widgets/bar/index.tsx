@@ -7,6 +7,7 @@ import { Time } from "./time";
 import { Tray } from "./tray";
 import { WorkspaceButton } from "./workspace";
 import { Bluetooth } from "./bluetooth";
+import { Cava } from "./cava";
 
 export const WINDOW_NAME = "bar";
 
@@ -32,7 +33,9 @@ export const Bar = (gdkmonitor: Gdk.Monitor) => {
         </box>
 
         <box spacing={10} $type="center">
+          <Cava />
           <WorkspaceButton />
+          <Cava />
         </box>
 
         <box spacing={10} $type="end">
