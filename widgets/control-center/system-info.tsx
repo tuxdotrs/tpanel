@@ -1,61 +1,19 @@
-import { createBinding, createComputed } from "ags";
 import { Gtk } from "ags/gtk4";
 import { createPoll } from "ags/time";
-import AstalBattery from "gi://AstalBattery";
-import AstalNetwork from "gi://AstalNetwork";
 
 export const SystemInfo = () => {
   const cpu = PollCMD("cat /sys/class/thermal/thermal_zone*/temp");
   const gpu = PollCMD("supergfxctl -g");
   const profile = PollCMD("asusctl profile -p");
   const tailscale = PollCMD("tailscale ping homelab");
-
-  const battery = AstalBattery.get_default();
-
-  const percentage = createBinding(battery, "percentage");
-  const charging = createBinding(battery, "charging");
-  const state = createBinding(battery, "state");
-  const energyRate = createBinding(battery, "energyRate");
-
-  const chargingIcon = createComputed(
-    [percentage, charging, state],
-    (percentage, charging, state) => {
-      const batFull = state === AstalBattery.State.FULLY_CHARGED;
-      const p = percentage * 100;
-
-      if (batFull) return "fa-battery-full-symbolic";
-      if (charging) return "fa-battery-charging-symbolic";
-      if (p < 30) return "fa-battery-low-symbolic";
-      return p < 70 ? "fa-battery-medium-symbolic" : "fa-battery-full-symbolic";
-    },
+  const cpuUsage = PollCMD(
+    `awk '{u=$2+$4; t=$2+$3+$4+$5+$6+$7+$8; if(NR==1){u1=u; t1=t}else{printf "%.1f%%",(u-u1)*100/(t-t1)}}' <(grep '^cpu ' /proc/stat; sleep 1; grep '^cpu ' /proc/stat)`,
+    2000,
   );
-
-  const network = AstalNetwork.get_default();
-  const connnectivity = createBinding(network, "connectivity");
-
-  const getNetworkText = (
-    conn: AstalNetwork.Connectivity,
-    net: AstalNetwork.Network,
-  ) => {
-    // no connection
-    if (conn == 1) return "No connection";
-
-    // wired
-    if (net.primary == 1) return "Wired";
-
-    // wifi
-    const wifi = net.wifi;
-    switch (wifi.internet) {
-      case 0:
-        return wifi.ssid;
-      case 1:
-        return "Connecting";
-      case 2:
-        return "Disconnected";
-    }
-
-    return "NA";
-  };
+  const ramUsage = PollCMD(
+    `awk '/MemTotal:|MemAvailable:/ {if($1=="MemTotal:") total=$2; if($1=="MemAvailable:") avail=$2} END {used=total-avail; printf "%.1f%%", used/total*100}' /proc/meminfo`,
+    2000,
+  );
 
   return (
     <>
@@ -65,10 +23,30 @@ export const SystemInfo = () => {
           spacing={15}
           orientation={Gtk.Orientation.VERTICAL}
         >
-          <image iconName="fa-wifi-symbolic" />
-          <label label={connnectivity((c) => getNetworkText(c, network))} />
+          <image iconName="fa-cpu-usage-symbolic" />
+          <label label={cpuUsage} />
         </box>
 
+        <box
+          cssClasses={["pill"]}
+          spacing={15}
+          orientation={Gtk.Orientation.VERTICAL}
+        >
+          <image iconName="fa-ram-symbolic" />
+          <label label={ramUsage} />
+        </box>
+
+        <box
+          cssClasses={["pill"]}
+          spacing={15}
+          orientation={Gtk.Orientation.VERTICAL}
+        >
+          <image iconName="fa-cpu-symbolic" />
+          <label label={cpu((val) => `${parseInt(val) / 1000} °C`)} />
+        </box>
+      </box>
+
+      <box hexpand homogeneous spacing={20} cssClasses={["system-info"]}>
         <box
           hexpand
           cssClasses={["pill"]}
@@ -93,18 +71,6 @@ export const SystemInfo = () => {
             })}
           />
         </box>
-      </box>
-
-      <box hexpand homogeneous spacing={20} cssClasses={["system-info"]}>
-        <box
-          hexpand
-          cssClasses={["pill"]}
-          spacing={15}
-          orientation={Gtk.Orientation.VERTICAL}
-        >
-          <image iconName="fa-cpu-symbolic" />
-          <label label={cpu((val) => `${parseInt(val) / 1000} °C`)} />
-        </box>
 
         <box
           cssClasses={["pill"]}
@@ -119,19 +85,6 @@ export const SystemInfo = () => {
               return data[data.length - 1];
             })}
           />
-        </box>
-
-        <box
-          cssClasses={["pill"]}
-          visible={createBinding(battery, "isPresent")}
-          spacing={15}
-          orientation={Gtk.Orientation.VERTICAL}
-        >
-          <image iconName={chargingIcon} />
-          <box hexpand halign={Gtk.Align.CENTER} spacing={5}>
-            <label label={percentage((p) => `${Math.floor(p * 100)}%`)} />
-            <label label={energyRate((v) => `${Math.floor(v * 10) / 10}W`)} />
-          </box>
         </box>
       </box>
     </>
