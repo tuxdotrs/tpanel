@@ -3,6 +3,8 @@ import Adw from "gi://Adw";
 import AstalNotifd from "gi://AstalNotifd";
 import GLib from "gi://GLib";
 import Pango from "gi://Pango";
+import { createTimeoutManager } from "./manager";
+import { onCleanup, onMount } from "ags";
 
 const isIcon = (icon?: string | null) => {
   const iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default()!);
@@ -33,7 +35,20 @@ const urgency = (n: AstalNotifd.Notification) => {
 const { VERTICAL } = Gtk.Orientation;
 const { START, END, CENTER } = Gtk.Align;
 
+// Keep track of notification validity
+const TIMEOUT_DELAY = 3000;
+
 export const Notification = ({ n }: { n: AstalNotifd.Notification }) => {
+  const timeoutManager = createTimeoutManager(() => n.dismiss(), TIMEOUT_DELAY);
+
+  onMount(() => {
+    timeoutManager.setupTimeout();
+  });
+
+  onCleanup(() => {
+    timeoutManager.cleanup();
+  });
+
   return (
     <Adw.Clamp maximumSize={400}>
       <box
@@ -42,6 +57,11 @@ export const Notification = ({ n }: { n: AstalNotifd.Notification }) => {
         orientation={VERTICAL}
         spacing={20}
       >
+        <Gtk.EventControllerMotion
+          onEnter={() => timeoutManager.handleHover()}
+          onLeave={() => timeoutManager.handleHoverLost()}
+        />
+
         <box class="header" spacing={10}>
           {(n.appIcon || isIcon(n.desktopEntry)) && (
             <image
