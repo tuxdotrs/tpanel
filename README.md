@@ -8,7 +8,7 @@
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/tuxdotrs/tpanel">
 </p>
 
-![full](https://raw.githubusercontent.com/tuxdotrs/tpanel/refs/heads/main/assets/gallery/full.png)
+![latest](https://raw.githubusercontent.com/tuxdotrs/tpanel/refs/heads/main/assets/gallery/latest.png)
 
 ## Installation
 
@@ -34,3 +34,5 @@ environment.systemPackages = [ inputs.tpanel.packages.${system}.default ];
 # Add this in your HomeManager config
 home.packages = [ inputs.tpanel.packages.${system}.default ];
 ```
+## Ooutdated Screenshot
+![full](https://raw.githubusercontent.com/tuxdotrs/tpanel/refs/heads/main/assets/gallery/full.png)
