@@ -1,0 +1,30 @@
+@use "./_variable.scss" as *;
+@use "sass:math";
+@use "sass:list";
+
+window.wallpaper-manager {
+  background: $bg-color;
+  color: $fg-color;
+  min-width: 400px;
+  margin: 10px;
+  padding: 20px;
+  border-radius: $rounded;
+
+  .button {
+    border-radius: $rounded;
+    opacity: 0.5;
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+  }
+
+  picture {
+    border-radius: $rounded;
+
+    &:hover {
+      background: $inactive-color;
+    }
+  }
+}
