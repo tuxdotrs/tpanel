@@ -34,5 +34,5 @@ environment.systemPackages = [ inputs.tpanel.packages.${system}.default ];
 # Add this in your HomeManager config
 home.packages = [ inputs.tpanel.packages.${system}.default ];
 ```
-## Ooutdated Screenshot
+## Outdated Screenshot
 ![full](https://raw.githubusercontent.com/tuxdotrs/tpanel/refs/heads/main/assets/gallery/full.png)
