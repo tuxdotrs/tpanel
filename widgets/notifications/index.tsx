@@ -1,4 +1,10 @@
-import { For, createState, onCleanup } from "ags";
+import {
+  For,
+  createBinding,
+  createComputed,
+  createState,
+  onCleanup,
+} from "ags";
 import { Astal, Gdk, Gtk } from "ags/gtk4";
 import AstalNotifd from "gi://AstalNotifd";
 import { Notification } from "./notification";
@@ -7,6 +13,7 @@ export const WINDOW_NAME = "notifications";
 
 export const Notifications = (gdkmonitor: Gdk.Monitor) => {
   const notifd = AstalNotifd.get_default();
+  const isDndMode = createBinding(notifd, "dont-disturb");
 
   const { TOP, RIGHT } = Astal.WindowAnchor;
 
@@ -33,13 +40,20 @@ export const Notifications = (gdkmonitor: Gdk.Monitor) => {
     notifd.disconnect(resolvedHandler);
   });
 
+  const shouldShowWindow = createComputed(
+    [notifications, isDndMode],
+    (notifs, dndEnabled) => {
+      return !dndEnabled && notifs.length > 0;
+    },
+  );
+
   return (
     <window
       $={(self) => onCleanup(() => self.destroy())}
       name={WINDOW_NAME}
       cssClasses={["notifications"]}
       gdkmonitor={gdkmonitor}
-      visible={notifications((ns) => ns.length > 0)}
+      visible={shouldShowWindow}
       anchor={TOP | RIGHT}
     >
       <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>

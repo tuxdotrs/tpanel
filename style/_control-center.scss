@@ -61,6 +61,27 @@ window.control-center {
     }
   }
 
+  .notification-list {
+    .focus {
+      background: $accent;
+    }
+
+    button {
+      background-color: $inactive-color;
+      border-radius: calc($rounded / 1.5);
+      padding: 10px;
+      transition: color 100ms;
+
+      &:hover {
+        background-color: rgba($accent, 1);
+      }
+
+      image {
+        -gtk-icon-size: 1.2rem;
+      }
+    }
+  }
+
   .footer {
     label {
       color: $accent;
