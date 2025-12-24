@@ -21,8 +21,7 @@ export const Network = () => {
     const wifi = net.wifi;
     switch (wifi.internet) {
       case 0:
-        const ssid = wifi.ssid;
-        ssid ? ssid : "";
+        let ssid = wifi.ssid ? wifi.ssid : "";
         let text = ssid.length > 10 ? ssid.substring(0, 10) + "..." : ssid;
         return text;
       case 1:
