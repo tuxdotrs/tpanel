@@ -11,7 +11,7 @@ import { Notification } from "./notification";
 
 export const WINDOW_NAME = "notifications";
 
-export const Notifications = (gdkmonitor: Gdk.Monitor) => {
+export const Notifications = ({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) => {
   const notifd = AstalNotifd.get_default();
   const isDndMode = createBinding(notifd, "dont-disturb");
 

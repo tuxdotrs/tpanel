@@ -1,3 +1,4 @@
+import { onCleanup } from "ags";
 import { Astal, Gdk, Gtk } from "ags/gtk4";
 import app from "ags/gtk4/app";
 import { exec } from "ags/process";
@@ -10,7 +11,11 @@ export const WINDOW_NAME = "wallpaper-manager";
 const wallpaperPath = `/home/tux/Wallpapers/new`;
 const imageFormats = [".jpeg", ".jpg", ".webp", ".png"];
 
-export const WallpaperManager = (gdkmonitor: Gdk.Monitor) => {
+export const WallpaperManager = ({
+  gdkmonitor,
+}: {
+  gdkmonitor: Gdk.Monitor;
+}) => {
   const { TOP, BOTTOM, LEFT } = Astal.WindowAnchor;
   const { VERTICAL } = Gtk.Orientation;
   const wallpaperList = getWallpaperList(wallpaperPath);
@@ -23,6 +28,7 @@ export const WallpaperManager = (gdkmonitor: Gdk.Monitor) => {
       application={app}
       keymode={Astal.Keymode.ON_DEMAND}
       anchor={TOP | BOTTOM | LEFT}
+      $={(self) => onCleanup(() => self.destroy())}
     >
       <Gtk.EventControllerKey onKeyPressed={onKey} />
       <scrolledwindow>

@@ -5,10 +5,11 @@ import { Header } from "./header";
 import { NotificationList } from "./notification-list";
 import { SlidingControls } from "./sliding-controls";
 import { SystemInfo } from "./system-info";
+import { onCleanup } from "ags";
 
 export const WINDOW_NAME = "control-center";
 
-export const ControlCenter = (gdkmonitor: Gdk.Monitor) => {
+export const ControlCenter = ({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) => {
   const { TOP, BOTTOM, RIGHT } = Astal.WindowAnchor;
   const { VERTICAL } = Gtk.Orientation;
 
@@ -20,6 +21,7 @@ export const ControlCenter = (gdkmonitor: Gdk.Monitor) => {
       application={app}
       keymode={Astal.Keymode.ON_DEMAND}
       anchor={TOP | BOTTOM | RIGHT}
+      $={(self) => onCleanup(() => self.destroy())}
     >
       <Gtk.EventControllerKey onKeyPressed={onKey} />
       <box vexpand orientation={VERTICAL} spacing={20}>

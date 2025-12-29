@@ -1,4 +1,4 @@
-import { createState, For } from "ags";
+import { createState, For, onCleanup } from "ags";
 import { Astal, Gdk, Gtk } from "ags/gtk4";
 import app from "ags/gtk4/app";
 import AstalApps from "gi://AstalApps";
@@ -59,7 +59,7 @@ const AppSearch = () => {
   );
 };
 
-export const Launcher = (gdkmonitor: Gdk.Monitor) => {
+export const Launcher = ({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) => {
   return (
     <window
       name={WINDOW_NAME}
@@ -72,6 +72,7 @@ export const Launcher = (gdkmonitor: Gdk.Monitor) => {
         if (visible) searchEntry.grab_focus();
         else searchEntry.set_text("");
       }}
+      $={(self) => onCleanup(() => self.destroy())}
     >
       <Gtk.EventControllerKey onKeyPressed={onKey} />
 
