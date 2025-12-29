@@ -66,8 +66,9 @@ export const SystemInfo = () => {
           <image iconName="fa-speed-symbolic" />
           <label
             label={profile((val) => {
-              const data = val.split(" ");
-              return data[data.length - 1];
+              const match = val.match(/Active profile is\s+(.+)/);
+              const activeProfile = match?.[1]?.trim() ?? "NA";
+              return activeProfile;
             })}
           />
         </box>
