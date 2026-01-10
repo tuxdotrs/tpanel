@@ -94,16 +94,7 @@ const setWallpaper = (name: string) => {
 
   if (!hyprctl) return;
 
-  const preloadedWalls = exec([hyprctl, "hyprpaper", "listloaded"]);
-  const nWall = preloadedWalls.split("\n").length;
-  console.log(nWall);
-
-  if (nWall >= 5) {
-    exec([hyprctl, "hyprpaper", "unload", "all"]);
-  }
-
-  exec([hyprctl, "hyprpaper", "preload", imagePath]);
-  exec([hyprctl, "hyprpaper", "wallpaper", `,${imagePath}`]);
+  exec([hyprctl, "hyprpaper", "wallpaper", `,${imagePath},`]);
 
   app.toggle_window(WINDOW_NAME);
 };
