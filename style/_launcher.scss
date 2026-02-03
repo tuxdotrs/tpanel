@@ -4,7 +4,7 @@ window.launcher {
   background: $bg-color;
   border-radius: $rounded;
   padding: 10px;
-  font-size: 1.2rem;
+  font-size: $font-size;
 
   .search {
     min-width: 300px;
@@ -30,7 +30,7 @@ window.launcher {
     }
 
     image {
-      -gtk-icon-size: 2rem;
+      -gtk-icon-size: 1.5rem;
     }
   }
 

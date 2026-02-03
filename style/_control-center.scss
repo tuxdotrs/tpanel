@@ -15,7 +15,7 @@ window.control-center {
     color: $fg-color;
     background-color: $inactive-color;
     border-radius: calc($rounded / 1.5);
-    padding: 20px;
+    padding: 15px;
 
     image {
       -gtk-icon-size: 2rem;
@@ -32,19 +32,19 @@ window.control-center {
   .header {
     .name {
       color: rgba($fg-color, 0.8);
-      font-size: 1.8rem;
+      font-size: 1.5rem;
     }
 
     .username {
       color: rgba($fg-color, 0.5);
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
 
     .controls {
       button {
         background-color: $inactive-color;
         border-radius: calc($rounded / 1.5);
-        padding: 10px;
+        padding: 6px;
         transition: color 100ms;
 
         &:hover {
@@ -56,7 +56,7 @@ window.control-center {
       }
 
       image {
-        -gtk-icon-size: 2rem;
+        -gtk-icon-size: 1.5rem;
       }
     }
   }

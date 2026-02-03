@@ -15,7 +15,7 @@ window.Bar {
     padding: 8px;
 
     image {
-      -gtk-icon-size: 1.5rem;
+      -gtk-icon-size: 1.2rem;
     }
 
     &:hover {
@@ -73,13 +73,13 @@ window.Bar {
     padding: 8px;
 
     image {
-      -gtk-icon-size: 1.5rem;
+      -gtk-icon-size: 1.2rem;
     }
   }
 
   .tray {
     image {
-      -gtk-icon-size: 1.3rem;
+      -gtk-icon-size: 1rem;
     }
 
     menubutton {
