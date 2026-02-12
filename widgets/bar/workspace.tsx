@@ -33,7 +33,7 @@ const Workspace = ({ ws }: WsButtonProps) => {
 };
 
 export const WorkspaceButton = () => {
-  const range = Array.from({ length: 4 + 1 }, (_, i) => i);
+  const range = Array.from({ length: 5 + 1 }, (_, i) => i);
   return (
     <box cssClasses={["workspace-container"]} spacing={4}>
       {range.map((i) => (
