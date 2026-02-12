@@ -63,6 +63,11 @@
 
             runHook postInstall
           '';
+
+          # Remove any broken symlinks
+          postFixup = ''
+            find $out -type l ! -exec test -e {} \; -delete 2>/dev/null || true
+          '';
         };
       in
         pkgs.runCommand "tpanel" {
