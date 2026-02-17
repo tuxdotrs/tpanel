@@ -1,20 +1,15 @@
-import { Gdk } from "ags/gtk4";
-import app from "ags/gtk4/app";
-import { WINDOW_NAME as APP_LAUNCHER_WINDOW_NAME } from "../launcher";
-import { WINDOW_NAME as CONTROL_CENTER_WINDOW_NAME } from "../control-center";
+import { Gdk, Gtk } from "ags/gtk4";
 
 type Props = {
   icon: string;
-  windowName:
-  | typeof APP_LAUNCHER_WINDOW_NAME
-  | typeof CONTROL_CENTER_WINDOW_NAME;
+  onClicked?: ((source: Gtk.Button) => void) | undefined;
 };
 
-export const Launcher = ({ icon, windowName }: Props) => {
+export const Launcher = ({ icon, onClicked }: Props) => {
   return (
     <button
       cssClasses={["launcher"]}
-      onClicked={() => app.toggle_window(windowName)}
+      onClicked={onClicked}
       cursor={Gdk.Cursor.new_from_name("pointer", null)}
     >
       <image iconName={icon} />

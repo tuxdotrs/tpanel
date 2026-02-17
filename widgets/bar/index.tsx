@@ -9,6 +9,7 @@ import { WorkspaceButton } from "./workspace";
 import { Bluetooth } from "./bluetooth";
 import { Cava } from "./cava";
 import { onCleanup } from "gnim";
+import { execAsync } from "ags/process";
 
 export const WINDOW_NAME = "bar";
 
@@ -29,7 +30,10 @@ export const Bar = ({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) => {
     >
       <centerbox>
         <box spacing={10} $type="start">
-          <Launcher windowName="launcher" icon="nix-symbolic" />
+          <Launcher
+            icon="nix-symbolic"
+            onClicked={() => execAsync("vicinae toggle")}
+          />
           <Network />
           <Battery />
         </box>
@@ -44,7 +48,10 @@ export const Bar = ({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) => {
           <Bluetooth />
           <Tray />
           <Time />
-          <Launcher windowName="control-center" icon="fa-ghost-symbolic" />
+          <Launcher
+            icon="fa-ghost-symbolic"
+            onClicked={() => app.toggle_window("control-center")}
+          />
         </box>
       </centerbox>
     </window>
