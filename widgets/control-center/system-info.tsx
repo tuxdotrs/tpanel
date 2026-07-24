@@ -4,8 +4,8 @@ import { createPoll } from "ags/time";
 export const SystemInfo = () => {
   const cpu = PollCMD("cat /sys/class/thermal/thermal_zone*/temp");
   const gpu = PollCMD("supergfxctl -g");
-  const profile = PollCMD("asusctl profile -p");
-  const tailscale = PollCMD("tailscale ping homelab");
+  const profile = PollCMD("asusctl profile get");
+  const home = PollCMD("ping 100.64.0.3 -c 1");
   const cpuUsage = PollCMD(
     `awk '{u=$2+$4; t=$2+$3+$4+$5+$6+$7+$8; if(NR==1){u1=u; t1=t}else{printf "%.1f%%",(u-u1)*100/(t-t1)}}' <(grep '^cpu ' /proc/stat; sleep 1; grep '^cpu ' /proc/stat)`,
     2000,
@@ -66,7 +66,7 @@ export const SystemInfo = () => {
           <image iconName="fa-speed-symbolic" />
           <label
             label={profile((val) => {
-              const match = val.match(/Active profile is\s+(.+)/);
+              const match = val.match(/^Active profile:\s*(.+)$/m);
               const activeProfile = match?.[1]?.trim() ?? "NA";
               return activeProfile;
             })}
@@ -81,9 +81,9 @@ export const SystemInfo = () => {
           <image iconName="fa-home-symbolic" />
 
           <label
-            label={tailscale((val) => {
-              const data = val.split(" ");
-              return data[data.length - 1];
+            label={home((val) => {
+              const time = `${parseInt(val.match(/time=([\d.]+)\s*ms/)?.[1] ?? "0", 10)}ms`;
+              return time;
             })}
           />
         </box>
