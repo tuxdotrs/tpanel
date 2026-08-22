@@ -38,7 +38,7 @@ export const Network = () => {
       cssClasses={["pill"]}
       cursor={Gdk.Cursor.new_from_name("pointer", null)}
       onClicked={() =>
-        execAsync(`wezterm start --class wezterm-floating nmtui`)
+        execAsync(`wezterm start --class wezterm-floating impala`)
       }
     >
       <box spacing={5}>
