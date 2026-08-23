@@ -3,22 +3,18 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell.Services.SystemTray
 import qs.config
+import qs.ui
 
-Rectangle {
+BarButton {
   id: root
 
   property int iconSize: 16
 
-  implicitWidth: trayRow.implicitWidth + 10
-  implicitHeight: 34
-  radius: Appearance.radius
-  color: Appearance.colors.inActive
+  hoverHighlight: false
+  pointerCursor: false
   visible: SystemTray.items.values.length > 0
 
-  Row {
-    id: trayRow
-
-    anchors.centerIn: parent
+  contentItem: Row {
     spacing: Appearance.spacing
 
     Repeater {
