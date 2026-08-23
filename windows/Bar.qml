@@ -10,6 +10,7 @@ import Quickshell.Services.SystemTray
 import Quickshell.Widgets
 import Quickshell.Wayland
 import qs.config
+import qs.services
 
 PanelWindow {
   id: window
