@@ -1,16 +1,11 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell
-import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
-import QtQuick.Effects
-import QtQuick.Shapes
-import Quickshell.Hyprland
-import Quickshell.Services.SystemTray
 import Quickshell.Widgets
-import Quickshell.Wayland
 import qs.config
-import qs.services
+import qs.ui
 
 PanelWindow {
   id: window
@@ -31,91 +26,51 @@ PanelWindow {
     bottom: true
   }
 
-  // Inline Components
-  component Corner: WrapperItem {
-    id: root
+  component BarSection: Rectangle {
+    id: section
 
-    property int corner
-    property real radius: Appearance.radius
-    property color color
+    property var widgets: []
+    property int alignment: Qt.AlignLeft
 
-    Component.onCompleted: {
-      switch (corner) {
-      case 0:
-        anchors.left = parent.left;
-        anchors.top = parent.top;
-        break;
-      case 1:
-        anchors.top = parent.top;
-        anchors.right = parent.right;
-        rotation = 90;
-        break;
-      case 2:
-        anchors.right = parent.right;
-        anchors.bottom = parent.bottom;
-        rotation = 180;
-        break;
-      case 3:
-        anchors.left = parent.left;
-        anchors.bottom = parent.bottom;
-        rotation = -90;
-        break;
-      }
-    }
+    color: "transparent"
+    implicitHeight: parent.height
+    Layout.fillWidth: true
 
-    Shape {
-      preferredRendererType: Shape.CurveRenderer
+    Row {
+      x: section.alignment === Qt.AlignLeft ? 0 : section.alignment === Qt.AlignRight ? parent.width - width : (parent.width - width) / 2
+      y: (section.height - height) / 2
+      spacing: Appearance.spacing
 
-      ShapePath {
-        strokeWidth: 0
-        fillColor: root.color
-        startX: root.radius
+      Repeater {
+        model: section.widgets
 
-        PathArc {
-          relativeX: -root.radius
-          relativeY: root.radius
-          radiusX: root.radius
-          radiusY: radiusX
-          direction: PathArc.Counterclockwise
-        }
+        Loader {
+          required property var modelData
 
-        PathLine {
-          relativeX: 0
-          relativeY: -root.radius
-        }
-
-        PathLine {
-          relativeX: root.radius
-          relativeY: 0
+          source: modelData
         }
       }
     }
-  }
-  component Exclusion: PanelWindow {
-    property string name
-    implicitWidth: 0
-    implicitHeight: 0
-    WlrLayershell.namespace: `quickshell:${name}ExclusionZone`
   }
 
   // Exclusions
   Scope {
-    Exclusion {
+    ExclusionZone {
       name: "left"
       exclusiveZone: leftBar.implicitWidth
       anchors.left: true
     }
-    Exclusion {
+    ExclusionZone {
       name: "top"
       exclusiveZone: topBar.implicitHeight
       anchors.top: true
     }
-    Exclusion {
+    ExclusionZone {
       name: "right"
       exclusiveZone: rightBar.implicitWidth
       anchors.right: true
     }
-    Exclusion {
+    ExclusionZone {
       name: "bottom"
       exclusiveZone: bottomBar.implicitHeight
       anchors.bottom: true
@@ -125,6 +80,7 @@ PanelWindow {
   // Bars
   Rectangle {
     id: leftBar
+
     implicitWidth: 10
     implicitHeight: QsWindow.window?.height ?? 0
     color: window.barColor
@@ -132,6 +88,7 @@ PanelWindow {
   }
   Rectangle {
     id: rightBar
+
     implicitWidth: 10
     implicitHeight: QsWindow.window?.height ?? 0
     color: window.barColor
@@ -139,6 +96,7 @@ PanelWindow {
   }
   Rectangle {
     id: bottomBar
+
     implicitWidth: QsWindow.window?.width ?? 0
     implicitHeight: 10
     color: window.barColor
@@ -146,6 +104,7 @@ PanelWindow {
   }
   Rectangle {
     id: topBar
+
     implicitWidth: QsWindow.window?.width ?? 0
     implicitHeight: 50
     color: window.barColor
@@ -153,6 +112,7 @@ PanelWindow {
 
     FlexboxLayout {
       id: flexLayout
+
       anchors.fill: parent
       anchors.margins: Appearance.margin
 
@@ -160,260 +120,24 @@ PanelWindow {
       direction: FlexboxLayout.Row
       justifyContent: FlexboxLayout.JustifySpaceBetween
 
-
-      Rectangle {
-        color: 'transparent'
-        implicitHeight: parent.height
-        Layout.fillWidth: true
-
-        Row {
-          Layout.fillWidth: true
-          anchors.verticalCenter: parent.verticalCenter
-          anchors.left: parent.left
-          spacing: Appearance.spacing
-
-          Button {
-            padding: Appearance.padding
-            display: AbstractButton.IconOnly
-
-            icon.color: Appearance.colors.foreground
-            icon.source: Quickshell.shellPath("assets") + "/icons/nix.svg"
-            onClicked: {
-              Quickshell.execDetached(["vicinae", "toggle"]);
-            }
-
-            hoverEnabled: true
-
-            HoverHandler {
-              cursorShape: Qt.PointingHandCursor
-            }
-
-            background: Rectangle {
-              anchors.fill: parent
-              radius: Appearance.radius
-              color: parent.hovered ? Appearance.colors.inActive : Appearance.colors.background
-
-              Behavior on color {
-                ColorAnimation {
-                  duration: Appearance.duration
-                }
-              }
-            }
-          }
-
-          Button {
-            padding: Appearance.padding
-
-            text: `${Battery.percentage}% ${Battery.energyRate}W`
-            palette.buttonText: Appearance.colors.foreground
-            font.family: Appearance.font.family
-            font.pointSize: Appearance.font.pointSize
-
-            icon.color: Appearance.colors.foreground
-            icon.source: Battery.icon
-
-            background: Rectangle {
-              anchors.fill: parent
-              radius: Appearance.radius
-              color: Appearance.colors.inActive
-            }
-          }
-
-          Button {
-            id: cava
-
-            padding: Appearance.padding
-
-            readonly property int barCount: 14
-            readonly property real maxValue: 100
-            readonly property bool shouldVisualize: barCount > 0 && Cava.values.some(v => v >= 0.001)
-
-            implicitWidth: 96
-            implicitHeight: 32
-
-            background: Rectangle {
-              anchors.fill: parent
-              radius: Appearance.radius
-              color: Appearance.colors.inActive
-            }
-
-            visible: shouldVisualize
-
-            Row {
-              id: barRow
-
-              anchors.fill: parent
-              anchors.margins: 8
-              spacing: 3
-
-              Repeater {
-                model: cava.barCount
-
-                Rectangle {
-                  required property int index
-                  readonly property real value: Cava.values[index] ?? 0
-
-                  width: (barRow.width - barRow.spacing * (cava.barCount - 1)) / cava.barCount
-                  height: Math.max(2, (value / cava.maxValue) * barRow.height)
-                  anchors.bottom: parent.bottom
-                  radius: width / 2
-                  color: Appearance.colors.accent
-                  antialiasing: true
-
-                  Behavior on height {
-                    NumberAnimation {
-                      duration: Appearance.duration
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+      BarSection {
+        widgets: BarLayout.left
+        alignment: Qt.AlignLeft
       }
-
-      Rectangle {
-        color: 'transparent'
-        implicitHeight: parent.height
-        Layout.fillWidth: true
-
-        Row {
-          Layout.fillWidth: true
-          anchors.verticalCenter: parent.verticalCenter
-          anchors.horizontalCenter: parent.horizontalCenter
-          spacing: Appearance.spacing
-
-          Repeater {
-            model: 7
-
-            Rectangle {
-              property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
-              property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
-              Layout.alignment: Qt.AlignVCenter
-              radius: 1000
-              implicitHeight: 15
-
-              implicitWidth: isActive ? this.implicitHeight * 2.3 : this.implicitHeight
-
-              color: {
-                if (handler.hovered) {
-                  return Appearance.colors.accent;
-                } else if (isActive || ws) {
-                  return Appearance.colors.accent;
-                } else {
-                  return Appearance.colors.inActive;
-                }
-              }
-
-              MouseArea {
-                hoverEnabled: true
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                onClicked: Hyprland.dispatch("workspace " + (index + 1))
-              }
-
-              Behavior on color {
-                ColorAnimation {
-                  duration: Appearance.duration
-                }
-              }
-              HoverHandler {
-                id: handler
-              }
-
-              Behavior on implicitWidth {
-                NumberAnimation {
-                  duration: Appearance.duration
-                  easing.type: Easing.OutQuad
-                }
-              }
-            }
-          }
-        }
+      BarSection {
+        widgets: BarLayout.center
+        alignment: Qt.AlignHCenter
       }
-      Rectangle {
-        color: 'transparent'
-        implicitHeight: parent.height
-        Layout.fillWidth: true
-
-        Row {
-          Layout.fillWidth: true
-          anchors.verticalCenter: parent.verticalCenter
-          anchors.right: parent.right
-          spacing: Appearance.spacing
-
-          Rectangle {
-            implicitWidth: sysTrayRow.implicitWidth + 10
-            implicitHeight: parent.height
-            radius: Appearance.radius
-            color: Appearance.colors.inActive
-            visible: SystemTray.items.values.length > 0
-
-            Row {
-              id: sysTrayRow
-
-              anchors.centerIn: parent
-              spacing: Appearance.spacing
-
-              Repeater {
-                model: SystemTray.items.values.length
-                Image {
-                  source: SystemTray.items.values[index].icon
-                  height: parent.parent.height - 18
-                  width: parent.parent.height - 18
-                }
-              }
-            }
-          }
-
-          Button {
-            padding: Appearance.padding
-            text: Time.time
-
-            palette.buttonText: Appearance.colors.foreground
-            font.family: Appearance.font.family
-            font.pointSize: Appearance.font.pointSize
-
-            background: Rectangle {
-              anchors.fill: parent
-              radius: Appearance.radius
-              color: Appearance.colors.inActive
-            }
-          }
-
-          Button {
-            padding: Appearance.padding
-            display: AbstractButton.IconOnly
-
-            icon.color: Appearance.colors.foreground
-            icon.source: Quickshell.shellPath("assets") + "/icons/ghost.svg"
-
-            hoverEnabled: true
-
-            HoverHandler {
-              cursorShape: Qt.PointingHandCursor
-            }
-
-            background: Rectangle {
-              anchors.fill: parent
-              radius: Appearance.radius
-              color: parent.hovered ? Appearance.colors.inActive : Appearance.colors.background
-
-              Behavior on color {
-                ColorAnimation {
-                  duration: Appearance.duration
-                }
-              }
-            }
-          }
-        }
+      BarSection {
+        widgets: BarLayout.right
+        alignment: Qt.AlignRight
       }
     }
-
   }
 
   Rectangle {
     id: cornersArea
+
     implicitWidth: QsWindow.window?.width - (leftBar.implicitWidth + rightBar.implicitWidth)
     implicitHeight: QsWindow.window?.height - (topBar.implicitHeight + bottomBar.implicitHeight)
     color: "transparent"
@@ -421,15 +145,14 @@ PanelWindow {
     y: topBar.implicitHeight
 
     Repeater {
-      model: 4 
+      model: 4
 
-      Corner {
+      RoundedCorner {
         required property int modelData
+
         corner: modelData
         color: window.barColor
       }
     }
   }
 }
-
-
