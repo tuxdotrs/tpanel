@@ -14,7 +14,7 @@ Singleton {
   property var left: [
     root.widget("LauncherButton"),
     root.widget("PowerProfileWidget"),
-    root.widget("BatteryIndicator"),
+    root.widget("HomeWidget"),
   ]
 
   property var center: [
@@ -24,6 +24,7 @@ Singleton {
   ]
 
   property var right: [
+    root.widget("BatteryIndicator"),
     root.widget("SystemTrayWidget"),
     root.widget("ClockWidget"),
     root.widget("GhostButton")
