@@ -3,4 +3,6 @@ import qs.windows
 
 Scope {
     Bar {}
+    Notification {}
 }
+
