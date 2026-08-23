@@ -13,6 +13,7 @@ Singleton {
 
   property var left: [
     root.widget("LauncherButton"),
+    root.widget("PowerProfileWidget"),
     root.widget("BatteryIndicator"),
   ]
 
