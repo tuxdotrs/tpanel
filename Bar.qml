@@ -217,6 +217,57 @@ PanelWindow {
               color: Appearance.colors.inActive
             }
           }
+
+          Button {
+            id: cava
+
+            padding: Appearance.padding
+
+            readonly property int barCount: 14
+            readonly property real maxValue: 100
+            readonly property bool shouldVisualize: barCount > 0 && Cava.values.some(v => v >= 0.001)
+
+            implicitWidth: 96
+            implicitHeight: 32
+
+            background: Rectangle {
+              anchors.fill: parent
+              radius: Appearance.radius
+              color: Appearance.colors.inActive
+            }
+
+            visible: shouldVisualize
+
+            Row {
+              id: barRow
+
+              anchors.fill: parent
+              anchors.margins: 8
+              spacing: 3
+
+              Repeater {
+                model: cava.barCount
+
+                Rectangle {
+                  required property int index
+                  readonly property real value: Cava.values[index] ?? 0
+
+                  width: (barRow.width - barRow.spacing * (cava.barCount - 1)) / cava.barCount
+                  height: Math.max(2, (value / cava.maxValue) * barRow.height)
+                  anchors.bottom: parent.bottom
+                  radius: width / 2
+                  color: Appearance.colors.accent
+                  antialiasing: true
+
+                  Behavior on height {
+                    NumberAnimation {
+                      duration: Appearance.duration
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
 
@@ -369,7 +420,7 @@ PanelWindow {
     y: topBar.implicitHeight
 
     Repeater {
-      model: [0, 1, 2, 3]
+      model: 4 
 
       Corner {
         required property int modelData
