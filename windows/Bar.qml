@@ -36,9 +36,11 @@ PanelWindow {
     implicitHeight: parent.height
     Layout.fillWidth: true
 
-    Row {
+    RowLayout {
+      id: secRow
+
+      anchors.verticalCenter: parent.verticalCenter
       x: section.alignment === Qt.AlignLeft ? 0 : section.alignment === Qt.AlignRight ? parent.width - width : (parent.width - width) / 2
-      y: (section.height - height) / 2
       spacing: Appearance.spacing
 
       Repeater {
@@ -48,6 +50,7 @@ PanelWindow {
           required property var modelData
 
           source: modelData
+          Layout.alignment: Qt.AlignVCenter
         }
       }
     }

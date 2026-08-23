@@ -14,11 +14,12 @@ Singleton {
   property var left: [
     root.widget("LauncherButton"),
     root.widget("BatteryIndicator"),
-    root.widget("CavaVisualizer")
   ]
 
   property var center: [
-    root.widget("Workspaces")
+    root.widget("CavaVisualizer"),
+    root.widget("Workspaces"),
+    root.widget("CavaVisualizer"),
   ]
 
   property var right: [
