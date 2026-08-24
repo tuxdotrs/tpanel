@@ -40,11 +40,11 @@ Singleton {
     Base16 {
         id: poimandres
 
-        base00: "#1b1e28"
-        base01: "#2b3040"
-        base02: "#32384a"
-        base03: "#3b4258"
-        base04: "#5d678a"
+        base00: "#0f0f0f"
+        base01: "#181818"
+        base02: "#202020"
+        base03: "#292929"
+        base04: "#3f3f3f"
         base05: "#E4F0FB"
         base06: "#b6d7f4"
         base07: "#ffffff"
