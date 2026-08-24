@@ -39,12 +39,6 @@ Rectangle {
                 radius: bar.width / 2
                 color: Theme.colors.accent
                 antialiasing: true
-
-                Behavior on height {
-                    NumberAnimation {
-                        duration: Theme.duration
-                    }
-                }
             }
         }
     }
