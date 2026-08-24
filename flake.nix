@@ -42,8 +42,15 @@
         };
       };
     in
-    {
+    rec {
       formatter.${system} = treefmtEval.config.build.wrapper;
+
+      packages.${system} = {
+        tshell = pkgs.callPackage ./package.nix {
+          inherit quickshellWithModules;
+        };
+        default = packages.${system}.tshell;
+      };
 
       devShells.${system}.default = pkgs.mkShell {
         packages = [
