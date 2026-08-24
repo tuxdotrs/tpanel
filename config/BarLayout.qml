@@ -11,7 +11,7 @@ Singleton {
         return `${Quickshell.shellPath("modules/bar")}/${name}.qml`;
     }
 
-    property var left: [root.widget("LauncherButton"), root.widget("PowerProfileWidget"), root.widget("HomeWidget"),]
+    property var left: [root.widget("LauncherButton"), root.widget("PowerProfileWidget"), root.widget("HomeWidget"), root.widget("MusicWidget")]
 
     property var center: [root.widget("CavaVisualizer"), root.widget("Workspaces"), root.widget("CavaVisualizer"),]
 
