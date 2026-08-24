@@ -32,12 +32,14 @@ shell.qml                 Entry point: Scope { Bar {}; Notification {} }
 │   └── Notification.qml  Popup notification stack window
 ├── modules/              Feature widgets, grouped by surface
 │   ├── bar/              Widgets placed in the bar (Clock, Workspaces,
-│   │                     BatteryIndicator, CavaVisualizer, SystemTray,
-│   │                     LauncherButton, PowerProfileWidget, GhostButton)
+│   │                     BatteryIndicator, AudioWidget, CavaVisualizer,
+│   │                     SystemTray, LauncherButton, PowerProfileWidget,
+│   │                     GhostButton)
 │   └── osd/              NotificationCard.qml
 ├── services/             QML Singletons exposing system state
 │   ├── Time.qml          SystemClock → formatted time string
 │   ├── Battery.qml       UPower display device → percentage/icon
+│   ├── Audio.qml         PipeWire default sink/source → device names/icons
 │   ├── PowerProfile.qml  UPower power profiles → name/icon
 │   ├── Cava.qml          Spawns `cava`, parses stdout into `values[]`
 │   └── Notifications.qml NotificationServer: popups, DND flag, history

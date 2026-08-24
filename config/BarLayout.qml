@@ -24,6 +24,7 @@ Singleton {
   ]
 
   property var right: [
+    root.widget("AudioWidget"),
     root.widget("BatteryIndicator"),
     root.widget("SystemTrayWidget"),
     root.widget("ClockWidget"),
