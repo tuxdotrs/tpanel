@@ -10,12 +10,10 @@ import "../modules/osd"
 PanelWindow {
     id: root
 
-    readonly property int cardWidth: 420
-
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore
     visible: Notifications.popupCount > 0
-    implicitWidth: root.cardWidth
+    implicitWidth: Theme.notification.width
     implicitHeight: stack.implicitHeight
 
     anchors {
@@ -23,8 +21,8 @@ PanelWindow {
         right: true
     }
     margins {
-        top: 50 + Appearance.margin
-        right: 10 + Appearance.margin
+        top: Theme.bar.height + Theme.margin
+        right: Theme.bar.thickness + Theme.margin
     }
 
     mask: Region {
@@ -37,7 +35,7 @@ PanelWindow {
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.left: parent.left
-        spacing: Appearance.spacing
+        spacing: Theme.spacing
 
         Repeater {
             model: [...Notifications.popups.values].reverse()

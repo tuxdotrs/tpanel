@@ -9,7 +9,7 @@ Row {
 
     property int count: 7
 
-    spacing: Appearance.spacing
+    spacing: Theme.spacing
 
     Repeater {
         model: root.count
@@ -21,15 +21,15 @@ Row {
             property var ws: Hyprland.workspaces.values.find(w => w.id === pill.index + 1)
             property bool isActive: Hyprland.focusedWorkspace?.id === (pill.index + 1)
 
-            radius: 1000
-            implicitHeight: 15
-            implicitWidth: pill.isActive ? pill.implicitHeight * 2.3 : pill.implicitHeight
+            radius: Theme.workspaces.radius
+            implicitHeight: Theme.workspaces.height
+            implicitWidth: pill.isActive ? pill.implicitHeight * Theme.workspaces.activeWidthRatio : pill.implicitHeight
             color: {
                 if (handler.hovered)
-                    return Appearance.colors.accent;
+                    return Theme.colors.accent;
                 if (pill.isActive || pill.ws)
-                    return Appearance.colors.accent;
-                return Appearance.colors.inActive;
+                    return Theme.colors.accent;
+                return Theme.colors.inActive;
             }
 
             MouseArea {
@@ -45,13 +45,13 @@ Row {
 
             Behavior on color {
                 ColorAnimation {
-                    duration: Appearance.duration
+                    duration: Theme.duration
                 }
             }
 
             Behavior on implicitWidth {
                 NumberAnimation {
-                    duration: Appearance.duration
+                    duration: Theme.duration
                     easing.type: Easing.OutQuad
                 }
             }

@@ -11,18 +11,18 @@ Rectangle {
     property real maxValue: 100
     readonly property bool shouldVisualize: barCount > 0 && Cava.values.some(v => v >= 0.001)
 
-    implicitWidth: 96
-    implicitHeight: 32
-    radius: Appearance.radius
-    color: Appearance.colors.inActive
+    implicitWidth: Theme.cava.width
+    implicitHeight: Theme.cava.height
+    radius: Theme.radius
+    color: Theme.colors.inActive
     visible: shouldVisualize
 
     Row {
         id: barRow
 
         anchors.fill: parent
-        anchors.margins: 8
-        spacing: 3
+        anchors.margins: Theme.cava.innerMargin
+        spacing: Theme.cava.barSpacing
 
         Repeater {
             model: root.barCount
@@ -34,15 +34,15 @@ Rectangle {
                 readonly property real value: Cava.values[index] ?? 0
 
                 width: (barRow.width - barRow.spacing * (root.barCount - 1)) / root.barCount
-                height: Math.max(2, (bar.value / root.maxValue) * barRow.height)
+                height: Math.max(Theme.cava.barMinHeight, (bar.value / root.maxValue) * barRow.height)
                 anchors.bottom: parent.bottom
                 radius: bar.width / 2
-                color: Appearance.colors.accent
+                color: Theme.colors.accent
                 antialiasing: true
 
                 Behavior on height {
                     NumberAnimation {
-                        duration: Appearance.duration
+                        duration: Theme.duration
                     }
                 }
             }

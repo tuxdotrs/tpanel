@@ -10,7 +10,7 @@ import qs.ui
 PanelWindow {
     id: window
 
-    property color barColor: Appearance.colors.background
+    property color barColor: Theme.colors.background
 
     color: "transparent"
     exclusionMode: ExclusionMode.Ignore
@@ -41,7 +41,7 @@ PanelWindow {
 
             anchors.verticalCenter: parent.verticalCenter
             x: section.alignment === Qt.AlignLeft ? 0 : section.alignment === Qt.AlignRight ? parent.width - width : (parent.width - width) / 2
-            spacing: Appearance.spacing
+            spacing: Theme.spacing
 
             Repeater {
                 model: section.widgets
@@ -84,7 +84,7 @@ PanelWindow {
     Rectangle {
         id: leftBar
 
-        implicitWidth: 10
+        implicitWidth: Theme.bar.thickness
         implicitHeight: QsWindow.window?.height ?? 0
         color: window.barColor
         anchors.left: parent.left
@@ -92,7 +92,7 @@ PanelWindow {
     Rectangle {
         id: rightBar
 
-        implicitWidth: 10
+        implicitWidth: Theme.bar.thickness
         implicitHeight: QsWindow.window?.height ?? 0
         color: window.barColor
         anchors.right: parent.right
@@ -101,7 +101,7 @@ PanelWindow {
         id: bottomBar
 
         implicitWidth: QsWindow.window?.width ?? 0
-        implicitHeight: 10
+        implicitHeight: Theme.bar.thickness
         color: window.barColor
         anchors.bottom: parent.bottom
     }
@@ -109,7 +109,7 @@ PanelWindow {
         id: topBar
 
         implicitWidth: QsWindow.window?.width ?? 0
-        implicitHeight: 50
+        implicitHeight: Theme.bar.height
         color: window.barColor
         anchors.top: parent.top
 
@@ -117,7 +117,7 @@ PanelWindow {
             id: flexLayout
 
             anchors.fill: parent
-            anchors.margins: Appearance.margin
+            anchors.margins: Theme.margin
 
             wrap: FlexboxLayout.Wrap
             direction: FlexboxLayout.Row

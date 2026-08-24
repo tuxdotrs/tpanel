@@ -8,14 +8,12 @@ import qs.ui
 BarButton {
     id: root
 
-    property int iconSize: 16
-
     hoverHighlight: false
     pointerCursor: false
     visible: SystemTray.items.values.length > 0
 
     contentItem: Row {
-        spacing: Appearance.spacing
+        spacing: Theme.spacing
 
         Repeater {
             model: SystemTray.items.values
@@ -24,8 +22,8 @@ BarButton {
                 required property var modelData
 
                 source: modelData.icon
-                width: root.iconSize
-                height: root.iconSize
+                width: Theme.tray.iconSize
+                height: Theme.tray.iconSize
             }
         }
     }

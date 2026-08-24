@@ -26,12 +26,12 @@ Rectangle {
     readonly property url themedIconUrl: iconName !== "" ? Quickshell.iconPath(iconName, false) : ""
     readonly property url iconUrl: `${Quickshell.shellPath("assets")}/icons/notification.svg`
 
-    implicitWidth: 360
-    implicitHeight: content.implicitHeight + Appearance.padding * 2
-    radius: Appearance.radius
-    color: Appearance.colors.background
-    border.width: critical ? 1 : 0
-    border.color: Appearance.colors.accent
+    implicitWidth: Theme.notification.width
+    implicitHeight: content.implicitHeight + Theme.padding * 2
+    radius: Theme.radius
+    color: Theme.colors.background
+    border.width: critical ? Theme.notification.borderWidth : 0
+    border.color: Theme.colors.accent
 
     Timer {
         id: countdown
@@ -52,12 +52,12 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.margins: Appearance.padding
-        spacing: Appearance.spacing
+        anchors.margins: Theme.padding
+        spacing: Theme.spacing
 
         Item {
-            width: 40
-            height: 40
+            width: Theme.notification.iconSize
+            height: Theme.notification.iconSize
             Layout.alignment: Qt.AlignTop
 
             Image {
@@ -77,23 +77,23 @@ Rectangle {
         }
 
         ColumnLayout {
-            spacing: 2
+            spacing: Theme.notification.textSpacing
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
 
             Text {
                 text: root.notif?.appName ?? ""
-                color: Appearance.colors.accent
-                font.family: Appearance.font.family
-                font.pointSize: Appearance.font.pointSize - 2
+                color: Theme.colors.accent
+                font.family: Theme.font.family
+                font.pointSize: Theme.font.caption
                 elide: Text.ElideRight
                 Layout.fillWidth: true
             }
             Text {
                 text: root.notif?.summary ?? ""
-                color: Appearance.colors.foreground
-                font.family: Appearance.font.family
-                font.pointSize: Appearance.font.pointSize
+                color: Theme.colors.foreground
+                font.family: Theme.font.family
+                font.pointSize: Theme.font.pointSize
                 font.weight: Font.DemiBold
                 elide: Text.ElideRight
                 Layout.fillWidth: true
@@ -101,10 +101,10 @@ Rectangle {
             Text {
                 text: root.notif?.body ?? ""
                 visible: text !== ""
-                color: Appearance.colors.foreground
-                opacity: 0.8
-                font.family: Appearance.font.family
-                font.pointSize: Appearance.font.pointSize - 1
+                color: Theme.colors.foreground
+                opacity: Theme.notification.bodyOpacity
+                font.family: Theme.font.family
+                font.pointSize: Theme.font.body
                 wrapMode: Text.Wrap
                 maximumLineCount: 3
                 elide: Text.ElideRight

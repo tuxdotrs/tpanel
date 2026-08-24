@@ -9,7 +9,7 @@ WrapperItem {
     id: root
 
     property int corner
-    property real radius: Appearance.radius
+    property real radius: Theme.radius
     property color color
 
     Component.onCompleted: {

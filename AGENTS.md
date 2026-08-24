@@ -44,7 +44,7 @@ shell.qml                 Entry point: Scope { Bar {}; Notification {} }
 │   ├── Cava.qml          Spawns `cava`, parses stdout into `values[]`
 │   └── Notifications.qml NotificationServer: popups, DND flag, history
 ├── config/               QML Singletons for configuration/theming
-│   ├── Appearance.qml    colors, font, margin/radius/spacing/padding/duration
+│   ├── Theme.qml         colors, font, margin/radius/spacing/padding/duration, per-widget sizes
 │   └── BarLayout.qml     Which widgets go in left/center/right bar sections
 ├── ui/                   Shared reusable primitives
 │   ├── BarButton.qml     Themed button used by bar widgets
@@ -66,6 +66,6 @@ shell.qml                 Entry point: Scope { Bar {}; Notification {} }
 
 - Start every QML file with `pragma ComponentBehavior: Bound` where bindings reference outer ids.
 - Indentation is inconsistent across the repo (2-space in newer UI/window files, 4-space in some services); match the surrounding file when editing.
-- Prefer `readonly property` for derived values; keep widgets presentational and pull all theme values from `Appearance.*` rather than hardcoding colors/sizes/fonts.
+- Prefer `readonly property` for derived values; keep widgets presentational and pull all theme values from `Theme.*` rather than hardcoding colors/sizes/fonts.
 - Access asset paths via `Quickshell.shellPath(...)` (see `Battery.qml`, `NotificationCard.qml`) so paths work regardless of install location.
 - Commit messages follow Conventional Commits style (`feat(notifications): ...`, `refactor(bar): ...`).

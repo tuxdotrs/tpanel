@@ -13,14 +13,14 @@ Button {
     property bool hoverHighlight: true
     property bool pointerCursor: true
 
-    padding: Appearance.padding
+    padding: Theme.padding
     display: iconOnly ? AbstractButton.IconOnly : AbstractButton.TextBesideIcon
 
     text: label
-    font.family: Appearance.font.family
-    font.pointSize: Appearance.font.pointSize
-    palette.buttonText: Appearance.colors.foreground
-    icon.color: Appearance.colors.foreground
+    font.family: Theme.font.family
+    font.pointSize: Theme.font.pointSize
+    palette.buttonText: Theme.colors.foreground
+    icon.color: Theme.colors.foreground
     icon.source: iconSource
 
     HoverHandler {
@@ -30,16 +30,16 @@ Button {
 
     background: Rectangle {
         anchors.fill: parent
-        radius: Appearance.radius
+        radius: Theme.radius
         color: {
             if (!root.hoverHighlight)
-                return Appearance.colors.inActive;
-            return root.hovered ? Appearance.colors.inActive : Appearance.colors.background;
+                return Theme.colors.inActive;
+            return root.hovered ? Theme.colors.inActive : Theme.colors.background;
         }
 
         Behavior on color {
             ColorAnimation {
-                duration: Appearance.duration
+                duration: Theme.duration
             }
         }
     }
