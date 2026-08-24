@@ -39,6 +39,7 @@
         programs = {
           nixfmt.enable = true;
           qmlformat.enable = true;
+          clang-format.enable = true;
         };
       };
     in
@@ -57,7 +58,23 @@
           quickshellWithModules
           pkgs.cava
           pkgs.wallust
+          pkgs.dbus
+          pkgs.cmake
+          pkgs.ninja
+          pkgs.qt6.qtbase
+          pkgs.qt6.qtdeclarative
         ];
+
+        shellHook = ''
+          if [ -d "$PWD/plugin/dist/lib/qt-6/qml" ]; then
+            export NIXPKGS_QT6_QML_IMPORT_PATH="$PWD/plugin/dist/lib/qt-6/qml''${NIXPKGS_QT6_QML_IMPORT_PATH:+:$NIXPKGS_QT6_QML_IMPORT_PATH}"
+            export QML2_IMPORT_PATH="$PWD/plugin/dist/lib/qt-6/qml''${QML2_IMPORT_PATH:+:$QML2_IMPORT_PATH}"
+          else
+            echo "gpu plugin is not built; run from the repo root to enable 'import Tshell.Cardwire':"
+            echo "  cmake -S plugin -B plugin/dist -DCMAKE_INSTALL_PREFIX=\$PWD/plugin/dist"
+            echo "  cmake --build plugin/dist --target install"
+          fi
+        '';
       };
     };
 }
