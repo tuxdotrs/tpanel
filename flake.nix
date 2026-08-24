@@ -38,9 +38,7 @@
 
         programs = {
           nixfmt.enable = true;
-          qmlformat = {
-            enable = true;
-          };
+          qmlformat.enable = true;
         };
       };
     in
