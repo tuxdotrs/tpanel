@@ -5,4 +5,3 @@ Scope {
     Bar {}
     Notification {}
 }
-

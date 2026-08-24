@@ -4,8 +4,8 @@ import qs.ui
 import qs.services
 
 BarButton {
-  hoverHighlight: false
-  pointerCursor: false
-  label: PowerProfile.name
-  iconSource: PowerProfile.icon
+    hoverHighlight: false
+    pointerCursor: false
+    label: PowerProfile.name
+    iconSource: PowerProfile.icon
 }

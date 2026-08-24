@@ -6,27 +6,27 @@ import qs.config
 import qs.ui
 
 BarButton {
-  id: root
+    id: root
 
-  property int iconSize: 16
+    property int iconSize: 16
 
-  hoverHighlight: false
-  pointerCursor: false
-  visible: SystemTray.items.values.length > 0
+    hoverHighlight: false
+    pointerCursor: false
+    visible: SystemTray.items.values.length > 0
 
-  contentItem: Row {
-    spacing: Appearance.spacing
+    contentItem: Row {
+        spacing: Appearance.spacing
 
-    Repeater {
-      model: SystemTray.items.values
+        Repeater {
+            model: SystemTray.items.values
 
-      Image {
-        required property var modelData
+            Image {
+                required property var modelData
 
-        source: modelData.icon
-        width: root.iconSize
-        height: root.iconSize
-      }
+                source: modelData.icon
+                width: root.iconSize
+                height: root.iconSize
+            }
+        }
     }
-  }
 }
