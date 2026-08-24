@@ -138,4 +138,13 @@ Singleton {
         property int textSpacing: 2
         property real bodyOpacity: 0.8
     }
+
+    property QtObject volume: QtObject {
+        property int width: 300
+        property int height: 48
+        property int iconSize: 22
+        property int barHeight: 10
+        property int timeout: 1500
+        property real bottomMarginRatio: 0.2
+    }
 }

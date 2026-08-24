@@ -11,6 +11,8 @@ Singleton {
     readonly property string inputName: truncateText(root.displayName(Pipewire.defaultAudioSource), 14)
     readonly property url outputIcon: `${Quickshell.shellPath("assets")}/icons/speaker.svg`
     readonly property url inputIcon: `${Quickshell.shellPath("assets")}/icons/microphone.svg`
+    readonly property real volume: Pipewire.defaultAudioSink?.audio.volume ?? 0
+    readonly property bool muted: Pipewire.defaultAudioSink?.audio.muted ?? false
 
     function truncateText(text, maxLength) {
         return text.length > maxLength ? text.slice(0, maxLength - 3) + "..." : text;

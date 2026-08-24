@@ -4,4 +4,5 @@ import qs.windows
 Scope {
     Bar {}
     Notification {}
+    Volume {}
 }
