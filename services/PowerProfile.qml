@@ -7,7 +7,6 @@ import Quickshell.Services.UPower as UPower
 Singleton {
     id: root
 
-    readonly property bool performanceAvailable: UPower.PowerProfiles.hasPerformanceProfile
     readonly property string name: {
         switch (UPower.PowerProfiles.profile) {
         case UPower.PowerProfile.Performance:
