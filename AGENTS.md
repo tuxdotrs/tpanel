@@ -44,7 +44,7 @@ shell.qml                 Entry point: Scope { Bar {}; Notification {} }
 │   ├── Cava.qml          Spawns `cava`, parses stdout into `values[]`
 │   └── Notifications.qml NotificationServer: popups, DND flag, history
 ├── config/               QML Singletons for configuration/theming
-│   ├── Theme.qml         colors, font, margin/radius/spacing/padding/duration, per-widget sizes
+│   ├── Theme.qml         base16 palettes (Theme.colors.base00-0F + semantic aliases), font, margin/radius/spacing/padding/duration, per-widget sizes
 │   └── BarLayout.qml     Which widgets go in left/center/right bar sections
 ├── ui/                   Shared reusable primitives
 │   ├── BarButton.qml     Themed button used by bar widgets
