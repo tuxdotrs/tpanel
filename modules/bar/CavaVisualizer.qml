@@ -31,14 +31,28 @@ Rectangle {
                 id: bar
 
                 required property int index
-                readonly property real value: Cava.values[index] ?? 0
+                readonly property real level: Math.min(1, (Cava.values[index] ?? 0) / root.maxValue)
 
                 width: (barRow.width - barRow.spacing * (root.barCount - 1)) / root.barCount
-                height: Math.max(Theme.cava.barMinHeight, (bar.value / root.maxValue) * barRow.height)
-                anchors.bottom: parent.bottom
+                height: Math.max(Theme.cava.barMinHeight, Math.pow(bar.level, 0.6) * barRow.height)
+                anchors.verticalCenter: parent.verticalCenter
                 radius: bar.width / 2
                 color: Theme.colors.accent
                 antialiasing: true
+                opacity: 0.55 + 0.45 * bar.height / Math.max(1, barRow.height)
+
+                Behavior on height {
+                    NumberAnimation {
+                        duration: 90
+                        easing.type: Easing.OutCubic
+                    }
+                }
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 150
+                        easing.type: Easing.OutCubic
+                    }
+                }
             }
         }
     }
