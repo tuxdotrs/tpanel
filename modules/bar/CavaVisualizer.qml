@@ -39,7 +39,7 @@ Rectangle {
                 radius: bar.width / 2
                 color: Theme.colors.accent
                 antialiasing: true
-                opacity: 0.55 + 0.45 * bar.height / Math.max(1, barRow.height)
+                opacity: 0.45 + (bar.level * 0.55)
 
                 Behavior on height {
                     NumberAnimation {
